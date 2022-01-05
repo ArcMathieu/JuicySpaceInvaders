@@ -208,6 +208,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 506676423831626841, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 506676423831626841, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 506676423831626841, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -251,6 +259,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2187276518157679929, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
       propertyPath: bullet
       value: 
@@ -258,6 +270,30 @@ PrefabInstance:
     - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
       propertyPath: characterSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: bulletSpawnDist
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: maxAngleRotation
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: minAngleRotation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: characterAngularSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: characterHorizontalSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
+      propertyPath: characterAngularSpeedComeback
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
@@ -604,9 +640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84e68599a049d444ad4294cb48d9c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeCamera: 0
-  shakeDurationTimer: 0
+  shakeDuration: 0
   shakeAmount: 0.7
+  shakeDurationTimer: 0
 --- !u!1 &1317771990
 GameObject:
   m_ObjectHideFlags: 0
