@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Image uloose;
     void Start()
     {
         
@@ -14,5 +15,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void GameOver() {
+        uloose.gameObject.SetActive(true);
     }
 }
