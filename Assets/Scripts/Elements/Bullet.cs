@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.GetComponent<Enemy>()) {
-            other.gameObject.GetComponent<Enemy>().Die();
+            other.gameObject.GetComponent<Enemy>().NewState(true);
         }
         if (!other.gameObject.GetComponent<PlayerController>()) {
             Die();
@@ -29,6 +29,5 @@ public class Bullet : MonoBehaviour
 
     void Die() {
         Destroy(gameObject);
-        Gino.instance.entitiesManager.player.CanShoot();
     }
 }

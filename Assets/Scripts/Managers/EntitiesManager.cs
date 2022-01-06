@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntitiesManager : MonoBehaviour {
     public int enemyDirection = 1;
-    public float distBetweenLines = 2;
+    public float distBetweenLines = 4;
     public bool newDirection = false;
 
     public PlayerController player;
@@ -16,9 +16,12 @@ public class EntitiesManager : MonoBehaviour {
     [SerializeField] private float timeBetweenShoot = 1;
     private float timeBetweenShootTimer = 0;
 
+    private float randomFactorX = 2f;
+    private float randomFactorZ = 6f;
+
     public List<Enemy> enemies = new List<Enemy>();
     void Start() {
-        NewWave(5,3);
+        NewWave(10,5);
     }
 
     // Update is called once per frame
@@ -31,11 +34,16 @@ public class EntitiesManager : MonoBehaviour {
         int direction = Random.Range(0, 2) == 0 ? -1 : 1;
         enemyDirection = direction;
         int randomPosition = Random.Range(0, 2);
+        float distBetweenBorders = Vector3.Distance(Gino.instance.gameManager.rightBorder.transform.position, Gino.instance.gameManager.leftBorder.transform.position);
         for (int i = 0; i < lines; i++) {
             for (int j = 0; j < enemyEachLine; j++) {
+                float x = Random.Range(-distBetweenBorders / (enemyEachLine + 1f) / randomFactorX + transform.localScale.x / 2, distBetweenBorders / (enemyEachLine + 1f) / randomFactorX - transform.localScale.x / 2); 
+                float z = Random.Range(-distBetweenLines / randomFactorZ + transform.localScale.z / 2, distBetweenLines / randomFactorZ - transform.localScale.z / 2);
                 Enemy newEnemy = Instantiate(Enemy);
                 newEnemy.transform.position = LerpPosition(Gino.instance.gameManager.rightBorder, Gino.instance.gameManager.leftBorder, (j + 1) / (enemyEachLine + 1f));
-                newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, newEnemy.transform.position.y, newEnemy.transform.position.z + i * distBetweenLines);
+                newEnemy.transform.position = new Vector3(newEnemy.transform.position.x + x, newEnemy.transform.position.y, newEnemy.transform.position.z + i * distBetweenLines + z);
+                newEnemy.transform.gameObject.name = j + "/" + i ;
+                Debug.Log("Name :" + newEnemy.transform.gameObject.name + " V " + new Vector3(newEnemy.transform.position.x + x, newEnemy.transform.position.y, newEnemy.transform.position.z + i * distBetweenLines + z) + " x " + x + " z " + z);
                 enemies.Add(newEnemy);
             }
         }

@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    public enum State {
+        NORMAL = 0,
+        BROKEN = 1,
+        BURNED = 2,
+        DESTROYED = 3
+    }
 
-
+    State state = State.NORMAL;
 
     [SerializeField]
     private int lifePoint;
@@ -21,7 +27,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float minAngleRotation = 0;
 
-    private bool isStillBullet = false;
+    private float shootTimer = 0;
+    private float shootTime = 1;
+
     private bool shoot = false;
 
     Rigidbody rb;
@@ -59,10 +67,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Shoot() {
-        if (!isStillBullet && shoot) {
+        if (shoot && shootTimer <= 0) {
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + bulletSpawnDist);
-            isStillBullet = true;
+            shootTimer = shootTime;
+        } else {
+            shootTimer -= Time.deltaTime;
         }
     }
 
@@ -84,16 +94,21 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void ChangeLifePoint(int changeLifePoint) {
-        //if (changeLifePoint < 0) {
-        //    Gino.instance.uiManager.camera.Shake(true,0.2f,0.2f);
-        //}
         lifePoint += changeLifePoint;
         if (lifePoint < 1) {
             Gino.instance.uiManager.GameOver();
         }
     }
 
-    public void CanShoot() {
-        isStillBullet = false;
+    public void NewState(bool nextState, State newState = State.DESTROYED) {
+        if (nextState) {
+            state++;
+        } else {
+            state = newState;
+        }
+
+        if (state == State.DESTROYED) {
+            Gino.instance.uiManager.GameOver();
+        }
     }
 }

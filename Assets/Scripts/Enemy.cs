@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
+    public enum State {
+        NORMAL = 0,
+        BROKEN = 1,
+        DESTROYED = 2
+    }
+    public State state = State.NORMAL;
     [SerializeField]
     private int direction;
     [SerializeField]
     private int speed = 0;
-
     Rigidbody rb;
 
     public float bulletSpawnDist;
@@ -16,7 +21,6 @@ public class Enemy : MonoBehaviour {
         direction = Gino.instance.entitiesManager.enemyDirection;
         rb = GetComponent<Rigidbody>();
         rb.velocity = new Vector3(speed * direction, 0, 0);
-
     }
 
     // Update is called once per frame
@@ -59,6 +63,18 @@ public class Enemy : MonoBehaviour {
             Quaternion newRotation = Quaternion.identity;
             newRotation.eulerAngles = new Vector3 (-90, 0, 0);
             bullet.transform.rotation = newRotation;
+        }
+    }
+
+    public void NewState(bool nextState, State newState = State.DESTROYED) {
+        if (nextState) {
+            state++;
+        } else {
+            state = newState;
+        }
+
+        if (state == State.DESTROYED) {
+            Die();
         }
     }
 }
