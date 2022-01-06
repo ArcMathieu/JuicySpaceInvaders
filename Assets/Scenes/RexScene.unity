@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
       propertyPath: characterHorizontalSpeed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4989904455997735912, guid: 23b52763388cf3d4596da9062be9d767, type: 3}
       propertyPath: characterAngularSpeedComeback
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84e68599a049d444ad4294cb48d9c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeDuration: 0
+  shakeDuration: 1
   shakeAmount: 0.2
   shakeDurationTimer: 0
 --- !u!114 &1247192023

@@ -46,12 +46,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Movement() {
-        if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x + transform.localScale.x / 2 && direction != 1){
+        if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x + transform.localScale.x / 2 && direction <= 0){
             rb.velocity = new Vector3(0, 0, 0);
-            transform.position = new Vector3(Gino.instance.gameManager.leftBorder.transform.position.x, transform.position.y, transform.position.z);
-        }else if(Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x + transform.localScale.x / 2 && direction != -1) {
+            transform.position = new Vector3(Gino.instance.gameManager.leftBorder.transform.position.x - transform.localScale.x / 2, transform.position.y, transform.position.z);
+        }else if(Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x + transform.localScale.x / 2 && direction >= 0) {
             rb.velocity = new Vector3(0, 0, 0);
-            transform.position = new Vector3(Gino.instance.gameManager.rightBorder.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = new Vector3(Gino.instance.gameManager.rightBorder.transform.position.x - transform.localScale.x / 2, transform.position.y, transform.position.z);
         } else {
             rb.velocity = new Vector3(characterHorizontalSpeed * direction, 0, 0);
         }
