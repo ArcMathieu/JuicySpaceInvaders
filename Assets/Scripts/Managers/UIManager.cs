@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public Image uloose;
     public int score = 0;
+    public CameraController camera;
     void Start()
     {
         

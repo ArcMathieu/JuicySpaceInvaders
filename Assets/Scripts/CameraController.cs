@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Camera : MonoBehaviour {
+public class CameraController : MonoBehaviour {
 
     public float shakeDuration = 0f;
     public float shakeAmount = 0.7f;
@@ -14,17 +14,16 @@ public class Camera : MonoBehaviour {
 
     void Awake() {
         camTransform = gameObject.transform;
-    }
-
-    void OnEnable() {
         originalPos = camTransform.localPosition;
     }
 
+
     void Update() {
-        Shake(false, 0);
+        camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+        // Shake(false);
     }
 
-    void Shake(bool resetTimer, float newShakeAMount, float newDuration = 0) {
+    public void Shake(bool resetTimer, float newShakeAMount = 0, float newDuration = 0) {
 
         if (newDuration > 0) {
             shakeDuration = newDuration;
@@ -32,6 +31,7 @@ public class Camera : MonoBehaviour {
 
         if (resetTimer) {
             shakeDurationTimer = shakeDuration;
+            originalPos = camTransform.localPosition;
         }
 
         if (newShakeAMount > 0) {

@@ -59,7 +59,6 @@ public class EntitiesManager : MonoBehaviour {
     void ShootTimer() {
         if(timeBetweenShootTimer < 0) {
             timeBetweenShootTimer = timeBetweenShoot;
-            Debug.Log("Shoot");
             Shoot();
 
         } else {
