@@ -18,10 +18,17 @@ public class Bullet : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.GetComponent<Enemy>()) {
-            collision.gameObject.GetComponent<Enemy>().Die();
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.GetComponent<Enemy>()) {
+            other.gameObject.GetComponent<Enemy>().Die();
         }
+        if (!other.gameObject.GetComponent<PlayerController>()) {
+            Die();
+        }
+    }
+
+    void Die() {
         Destroy(gameObject);
+        Gino.instance.entitiesManager.player.CanShoot();
     }
 }

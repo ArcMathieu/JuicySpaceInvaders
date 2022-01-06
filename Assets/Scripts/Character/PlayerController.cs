@@ -3,19 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    float direction = 0;
-    public float characterHorizontalSpeed = 0;
 
-    public float characterAngularSpeed = 0;
-    public float characterAngularSpeedComeback = 0;
-    public float maxAngleRotation = 0;
-    public float minAngleRotation = 0;
 
-    bool shoot = false;
+
+    [SerializeField]
+    private int lifePoint;
+    [SerializeField]
+    private float direction = 0;
+    [SerializeField]
+    private float characterHorizontalSpeed = 0;
+    [SerializeField]
+    private float characterAngularSpeed = 0;
+    [SerializeField]
+    private float characterAngularSpeedComeback = 0;
+    [SerializeField]
+    private float maxAngleRotation = 0;
+    [SerializeField]
+    private float minAngleRotation = 0;
+
+    private bool isStillBullet = false;
+    private bool shoot = false;
 
     Rigidbody rb;
 
-    public GameObject bullet;
     public float bulletSpawnDist;
     void Start() {
         rb = GetComponent<Rigidbody>();
@@ -27,10 +37,12 @@ public class PlayerController : MonoBehaviour {
         direction = Input.GetAxis("Horizontal");
         if (Input.GetKeyDown("space")) {
             shoot = true;
+        } else {
+            shoot = false;
         }
         #endregion
-        Movement();
         Shoot();
+        Movement();   
     }
 
     void Movement() {
@@ -39,10 +51,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Shoot() {
-        if (shoot) {
-            GameObject newBullet = Instantiate(bullet);
+        if (!isStillBullet && shoot) {
+            Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + bulletSpawnDist);
-            shoot = false;
+            isStillBullet = true;
         }
     }
 
@@ -61,5 +73,16 @@ public class PlayerController : MonoBehaviour {
             newAngle = Time.deltaTime * -direction * characterAngularSpeed / 2  + Mathf.InverseLerp(180 - maxAngleRotation, 180 + maxAngleRotation, transform.localEulerAngles.y);
         }
         transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 180 - maxAngleRotation, 0) , Quaternion.Euler(0,180 + maxAngleRotation,0), newAngle);
+    }
+
+    public void ChangeLifePoint(int changeLifePoint) {
+        lifePoint += changeLifePoint;
+        if (lifePoint < 1) {
+            Gino.instance.uiManager.GameOver();
+        }
+    }
+
+    public void CanShoot() {
+        isStillBullet = false;
     }
 }

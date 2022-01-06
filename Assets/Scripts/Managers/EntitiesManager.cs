@@ -3,19 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EntitiesManager : MonoBehaviour {
-    public Enemy Enemy;
-    public PlayerController player;
-    public float distBetweenLines = 2;
     public int enemyDirection = 1;
-    public int enemyDirectionNumber = 0;
-    public int enemyNumber;
+    public float distBetweenLines = 2;
+    public bool newDirection = false;
+
+    public PlayerController player;
+    public Bullet bullet;
+    public EnemyBullet enemybullet;
+    [SerializeField] private Enemy Enemy;
+
+
+    [SerializeField] private float timeBetweenShoot = 1;
+    private float timeBetweenShootTimer = 0;
+
+    public List<Enemy> enemies = new List<Enemy>();
     void Start() {
         NewWave(5,3);
     }
 
     // Update is called once per frame
-    void Update() {
-
+    void LateUpdate() {
+        NewDirection();
+        ShootTimer();
     }
 
     void NewWave(int enemyEachLine, int lines) {
@@ -27,10 +36,9 @@ public class EntitiesManager : MonoBehaviour {
                 Enemy newEnemy = Instantiate(Enemy);
                 newEnemy.transform.position = LerpPosition(Gino.instance.gameManager.rightBorder, Gino.instance.gameManager.leftBorder, (j + 1) / (enemyEachLine + 1f));
                 newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, newEnemy.transform.position.y, newEnemy.transform.position.z + i * distBetweenLines);
-                enemyNumber++;
+                enemies.Add(newEnemy);
             }
         }
-
     }
 
     Vector3 LerpPosition(Transform first, Transform second, float Between) {
@@ -41,10 +49,26 @@ public class EntitiesManager : MonoBehaviour {
         return final;
     }
 
-    public void NewDirection() {
-        if (enemyDirectionNumber == 0) {
+    [SerializeField] private void NewDirection() {
+        if (newDirection) {
             enemyDirection *= -1;
-            enemyDirectionNumber = enemyNumber;
+            newDirection = false;
         }
+    }
+
+    void ShootTimer() {
+        if(timeBetweenShootTimer < 0) {
+            timeBetweenShootTimer = timeBetweenShoot;
+            Debug.Log("Shoot");
+            Shoot();
+
+        } else {
+            timeBetweenShootTimer -= Time.deltaTime;
+        }
+    }
+
+    void Shoot() {
+        int Shooter = Random.Range(0,enemies.Count);
+        enemies[Shooter].Shoot();
     }
 }

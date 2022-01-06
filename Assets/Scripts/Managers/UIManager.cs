@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Image uloose;
+    public int score = 0;
     void Start()
     {
         
@@ -19,5 +20,9 @@ public class UIManager : MonoBehaviour
 
     public void GameOver() {
         uloose.gameObject.SetActive(true);
+    }
+
+    public void AddScore(int addScore) {
+        score += addScore;
     }
 }

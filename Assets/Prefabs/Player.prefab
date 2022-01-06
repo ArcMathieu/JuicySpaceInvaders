@@ -125,6 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd384a1d25206c4093ae89af13571e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSpeed: 0
-  bullet: {fileID: 0}
-  bulletSpawnDist: 0.625
+  lifePoint: 0
+  direction: 0
+  characterHorizontalSpeed: 0
+  characterAngularSpeed: 0
+  characterAngularSpeedComeback: 0
+  maxAngleRotation: 0
+  minAngleRotation: 0
+  bulletSpawnDist: 0.8
