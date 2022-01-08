@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public enum State {
-        NORMAL = 0,
-        BROKEN = 1,
-        BURNED = 2,
-        DESTROYED = 3
+        NORMAL = 3,
+        HIT1 = 2,
+        HIT2 = 1,
+        HIT3 = 0
     }
 
     State state = State.NORMAL;
@@ -31,12 +31,17 @@ public class PlayerController : MonoBehaviour {
     private float shootTime = 1;
 
     private bool shoot = false;
-
+    public GameObject[] bodies = new GameObject[0];
+    [SerializeField]
+    GameObject body;
     Rigidbody rb;
+    BoxCollider bc;
 
     public float bulletSpawnDist;
     void Start() {
+        NewBody(bodies.Length - 1);
         rb = GetComponent<Rigidbody>();
+        bc = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -54,12 +59,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Movement() {
-        if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x + transform.localScale.x / 2 && direction <= 0){
+        if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x + bc.size.x / 2 && direction <= 0){
             rb.velocity = new Vector3(0, 0, 0);
-            transform.position = new Vector3(Gino.instance.gameManager.leftBorder.transform.position.x - transform.localScale.x / 2, transform.position.y, transform.position.z);
-        }else if(Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x + transform.localScale.x / 2 && direction >= 0) {
+            transform.position = new Vector3(Gino.instance.gameManager.leftBorder.transform.position.x - bc.size.x / 2, transform.position.y, transform.position.z);
+        }else if(Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x + bc.size.x / 2 && direction >= 0) {
             rb.velocity = new Vector3(0, 0, 0);
-            transform.position = new Vector3(Gino.instance.gameManager.rightBorder.transform.position.x - transform.localScale.x / 2, transform.position.y, transform.position.z);
+            transform.position = new Vector3(Gino.instance.gameManager.rightBorder.transform.position.x - bc.size.x / 2, transform.position.y, transform.position.z);
         } else {
             rb.velocity = new Vector3(characterHorizontalSpeed * direction, 0, 0);
         }
@@ -100,15 +105,34 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void NewState(bool nextState, State newState = State.DESTROYED) {
+    public void NewState(bool nextState, State newState = State.HIT3) {
         if (nextState) {
-            state++;
+            state--;
         } else {
             state = newState;
         }
 
-        if (state == State.DESTROYED) {
+        if (state == State.HIT3) {
             Gino.instance.uiManager.GameOver();
         }
+        NewBody((int)state);
+    }
+
+    public void Hit() {
+        ChangeLifePoint(-1);
+        NewState(true);
+        Gino.instance.uiManager.LoseLife((int)state);
+    }
+
+    void NewBody(int newBodyRange) {
+        GameObject newBody = Instantiate(bodies[newBodyRange]);
+        newBody.transform.position = transform.position;
+        newBody.transform.eulerAngles = transform.eulerAngles + newBody.transform.localEulerAngles;
+        newBody.transform.SetParent(transform);
+        if (body != null) {
+            body.SetActive(false);
+            Destroy(body);
+        }
+        body = newBody;
     }
 }

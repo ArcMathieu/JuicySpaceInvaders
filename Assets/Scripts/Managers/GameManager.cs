@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public Transform rightBorder;
     public Transform leftBorder;
+    public Transform frontBorder;
+    public Transform backBorder;
     public Transform gameOver;
     public Transform Score;
 

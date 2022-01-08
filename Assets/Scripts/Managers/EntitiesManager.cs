@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntitiesManager : MonoBehaviour {
     public int enemyDirection = 1;
-    public float distBetweenLines = 4;
+    public float distJump = 0;
     public bool newDirection = false;
 
     public PlayerController player;
@@ -21,7 +21,7 @@ public class EntitiesManager : MonoBehaviour {
 
     public List<Enemy> enemies = new List<Enemy>();
     void Start() {
-        NewWave(10,5);
+        NewWave(7,5);
     }
 
     // Update is called once per frame
@@ -34,16 +34,16 @@ public class EntitiesManager : MonoBehaviour {
         int direction = Random.Range(0, 2) == 0 ? -1 : 1;
         enemyDirection = direction;
         int randomPosition = Random.Range(0, 2);
-        float distBetweenBorders = Vector3.Distance(Gino.instance.gameManager.rightBorder.transform.position, Gino.instance.gameManager.leftBorder.transform.position);
+        float distBetweenLeftRightBorders = Vector3.Distance(Gino.instance.gameManager.rightBorder.transform.position, Gino.instance.gameManager.leftBorder.transform.position);
+        float distBetweenFrontBackBorders = Vector3.Distance(Gino.instance.gameManager.frontBorder.transform.position, Gino.instance.gameManager.backBorder.transform.position);
         for (int i = 0; i < lines; i++) {
             for (int j = 0; j < enemyEachLine; j++) {
-                float x = Random.Range(-distBetweenBorders / (enemyEachLine + 1f) / randomFactorX + transform.localScale.x / 2, distBetweenBorders / (enemyEachLine + 1f) / randomFactorX - transform.localScale.x / 2); 
-                float z = Random.Range(-distBetweenLines / randomFactorZ + transform.localScale.z / 2, distBetweenLines / randomFactorZ - transform.localScale.z / 2);
+                float x = Random.Range(-distBetweenLeftRightBorders / (enemyEachLine + 1f) / randomFactorX + transform.localScale.x / 2, distBetweenLeftRightBorders / (enemyEachLine + 1f) / randomFactorX - transform.localScale.x / 2); 
+                float z = Random.Range(-distBetweenFrontBackBorders / (enemyEachLine + 1f) / randomFactorZ + transform.localScale.x / 2, distBetweenFrontBackBorders / (enemyEachLine + 1f) / randomFactorZ - transform.localScale.x / 2);
                 Enemy newEnemy = Instantiate(Enemy);
                 newEnemy.transform.position = LerpPosition(Gino.instance.gameManager.rightBorder, Gino.instance.gameManager.leftBorder, (j + 1) / (enemyEachLine + 1f));
-                newEnemy.transform.position = new Vector3(newEnemy.transform.position.x + x, newEnemy.transform.position.y, newEnemy.transform.position.z + i * distBetweenLines + z);
+                newEnemy.transform.position = new Vector3(newEnemy.transform.position.x + x, newEnemy.transform.position.y, newEnemy.transform.position.z + i * distBetweenFrontBackBorders / lines + z);
                 newEnemy.transform.gameObject.name = j + "/" + i ;
-                Debug.Log("Name :" + newEnemy.transform.gameObject.name + " V " + new Vector3(newEnemy.transform.position.x + x, newEnemy.transform.position.y, newEnemy.transform.position.z + i * distBetweenLines + z) + " x " + x + " z " + z);
                 enemies.Add(newEnemy);
             }
         }

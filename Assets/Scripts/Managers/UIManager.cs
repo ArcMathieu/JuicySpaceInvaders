@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Image uloose;
+    public Image gameOver;
     public int score = 0;
     public CameraController camera;
+    public Image[] lifes = new Image[0];
     void Start()
     {
         
@@ -20,10 +21,16 @@ public class UIManager : MonoBehaviour
     }
 
     public void GameOver() {
-        uloose.gameObject.SetActive(true);
+        gameOver.gameObject.SetActive(true);
     }
 
     public void AddScore(int addScore) {
         score += addScore;
+    }
+
+    public void LoseLife(int life) {
+        for (int i = lifes.Length - 1; i > life - 1; i--) {
+            lifes[i].gameObject.SetActive(false);
+        }
     }
 }
