@@ -81,6 +81,8 @@ MonoBehaviour:
   characterAngularSpeedComeback: 10
   maxAngleRotation: 45
   minAngleRotation: 2
+  propulsionFrame: 0
+  propulsionDist: 0
   bodies:
   - {fileID: 7016730758079924113, guid: ec109e10442afee4f8250b67ff0bc704, type: 3}
   - {fileID: 94067993154727973, guid: 01a09f33d364d314aaf46a552c08c9b9, type: 3}

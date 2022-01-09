@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour {
     private float maxAngleRotation = 0;
     [SerializeField]
     private float minAngleRotation = 0;
+    [SerializeField]
+    private int propulsionFrame = 0;
+    [SerializeField]
+    private int propulsionDist = 0;
 
     private float shootTimer = 0;
     private float shootTime = 1;
@@ -76,10 +80,31 @@ public class PlayerController : MonoBehaviour {
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + bulletSpawnDist);
             shootTimer = shootTime;
+            StartCoroutine(Propulsion(propulsionFrame, propulsionDist));
         } else {
             shootTimer -= Time.deltaTime;
         }
     }
+
+    IEnumerator Propulsion(float frame, int jumpSize) {
+        float jump = 0;
+        Vector3 position = transform.position;
+        int time = 0;
+        jump = -jumpSize / (frame * 2);
+        while (time < frame / 2) {
+            transform.position += new Vector3 (0,0, jump);
+            time++;
+            yield return null;
+            Debug.Log(jump);
+        }
+        jump = jumpSize / (frame * 2);
+        while (time < frame) {
+            transform.position += new Vector3(0, 0, jump);
+            time++;
+            yield return null;
+        }
+    }
+
 
     private void RotateDeltaTime() {
         float newAngle = 0.5f;
@@ -126,7 +151,7 @@ public class PlayerController : MonoBehaviour {
 
     void NewBody(int newBodyRange) {
         GameObject newBody = Instantiate(bodies[newBodyRange]);
-        newBody.transform.position = transform.position;
+        newBody.transform.position = transform.position + newBody.transform.localPosition;
         newBody.transform.eulerAngles = transform.eulerAngles + newBody.transform.localEulerAngles;
         newBody.transform.SetParent(transform);
         if (body != null) {
