@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public Image gameOver;
     public int score = 0;
-    public CameraController camera;
+    //public CameraController camera;
     public Image[] lifes = new Image[0];
     void Start()
     {
