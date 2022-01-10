@@ -5,24 +5,27 @@ using UnityEngine;
 public class DecorsManager : MonoBehaviour
 {
     public float decorSpeed;
-    public float spawnDelay;
-    public GameObject[] decors;
-    public Transform[] spawnPoint;
-    public float rangeX;
-    public float rangeY;
 
-    public float lampSpawnDelay;
-    public GameObject lampadaire;
-    public Transform[] lampSpawns;
-
+    [Header("ROAD")]
+    public Transform roadParent;
     public GameObject roadPrefab;
     public Transform roadSpawn;
 
-    public GameObject roadBGPrefab;
-    public Transform roadBGSpawn;
+    //public float spawnDelay;
+    //public GameObject[] decors;
+    //public Transform[] spawnPoint;
+    //public float rangeX;
+    //public float rangeY;
 
-    private float currentTime = 0f;
-    private float lampTime = 0f;
+    //public float lampSpawnDelay;
+    //public GameObject lampadaire;
+    //public Transform[] lampSpawns;
+
+    //public GameObject roadBGPrefab;
+    //public Transform roadBGSpawn;
+
+    //private float currentTime = 0f;
+    //private float lampTime = 0f;
 
     //// Update is called once per frame
     //void Update()
@@ -70,7 +73,7 @@ public class DecorsManager : MonoBehaviour
 
     public void SpawnRoad()
     {
-        GameObject road = Instantiate(roadPrefab, roadSpawn.position, roadSpawn.rotation);
+        GameObject road = Instantiate(roadPrefab, roadSpawn.position, roadSpawn.rotation, roadParent.transform);
         road.AddComponent<RoadMovement>();
     }
 

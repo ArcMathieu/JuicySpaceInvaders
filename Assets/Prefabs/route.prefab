@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3695118251258001215}
   - component: {fileID: 353649039914612890}
   - component: {fileID: 2525567920362507344}
-  - component: {fileID: 3804709379252867287}
   m_Layer: 0
   m_Name: route
   m_TagString: Untagged
@@ -82,15 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3804709379252867287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4038711629791882629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 367e97d4419827140a8fc8eb341b56db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

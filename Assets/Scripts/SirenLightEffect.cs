@@ -11,6 +11,21 @@ public class SirenLightEffect : MonoBehaviour
     private Vector3 blueT;
 
     [SerializeField] int speed;
+    [SerializeField] float lightRange;
+    [SerializeField] float lightIntensity;
+
+    float oldLightRange;
+    float oldLightIntensity;
+
+    private void Start()
+    {
+        oldLightRange = lightRange;
+        oldLightIntensity = lightIntensity;
+        redLight.range = lightRange;
+        blueLight.range = lightRange;
+        redLight.intensity = lightIntensity;
+        blueLight.intensity = lightIntensity;
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,5 +37,18 @@ public class SirenLightEffect : MonoBehaviour
 
         redLight.transform.eulerAngles = redT;
         blueLight.transform.eulerAngles = blueT;
+
+        if (lightRange != oldLightRange || lightIntensity != oldLightIntensity)
+            ReloadLight();
+    }
+
+    private void ReloadLight()
+    {
+        redLight.range = lightRange;
+        blueLight.range = lightRange;
+        redLight.intensity = lightIntensity;
+        blueLight.intensity = lightIntensity;
+        oldLightRange = lightRange;
+        oldLightIntensity = lightIntensity;
     }
 }
