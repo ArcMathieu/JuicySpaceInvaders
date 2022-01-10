@@ -13,6 +13,22 @@ public class Enemy : MonoBehaviour {
     private int direction;
     [SerializeField]
     private int speed = 0;
+    [SerializeField]
+    private float randomXValue = 0;
+    [SerializeField]
+    private float randomZValue = 0;
+    [SerializeField]
+    private float animationMinSeconds = 0;
+    [SerializeField]
+    private float animationMaxSeconds = 0;
+    private float minAnimationFrame = 0;
+    private float maxAnimationFrame = 0;
+    Vector3 lastPosition;
+    Vector3 originPosition;
+    Vector3 addPosition;
+    Vector3 nextPosition;
+    float animationFrame;
+    float percentOfEndAnimation;
 
     public GameObject[] bodies = new GameObject[0];
     [SerializeField]
@@ -23,11 +39,16 @@ public class Enemy : MonoBehaviour {
     public float bulletSpawnDist;
     void Start()
     {
+        minAnimationFrame = animationMinSeconds * 50f;
+        maxAnimationFrame = animationMaxSeconds * 50f;
+        nextPosition = Vector3.zero;
+        addPosition = Vector3.zero;
         direction = Gino.instance.entitiesManager.enemyDirection;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         rb.velocity = new Vector3(speed * direction, 0, 0);
         NewBody(bodies.Length - 1);
+        NewAnimation(randomXValue, randomZValue, minAnimationFrame, maxAnimationFrame);
     }
 
     // Update is called once per frame
@@ -46,6 +67,7 @@ public class Enemy : MonoBehaviour {
         if (transform.position.z < Gino.instance.entitiesManager.player.transform.position.z + Gino.instance.entitiesManager.player.transform.localScale.z / 2) {
             Gino.instance.uiManager.GameOver();
         }
+        Animation();
     }
 
     void NextLine() {
@@ -101,5 +123,32 @@ public class Enemy : MonoBehaviour {
             Destroy(body);
         }
         body = newBody;
+    }
+
+    public void Animation() {
+        percentOfEndAnimation += 1f / animationFrame;
+        originPosition = transform.position - addPosition;
+        addPosition = LerpPosition(lastPosition, nextPosition, percentOfEndAnimation);
+        transform.position = originPosition + addPosition;
+        if (percentOfEndAnimation >= 1) {
+            NewAnimation(randomXValue, randomZValue, minAnimationFrame, maxAnimationFrame);
+        }
+    }
+
+    Vector3 LerpPosition(Vector3 first, Vector3 second, float Between) {
+        Vector3 final = Vector3.zero;
+        final.x = Mathf.Lerp(first.x, second.x, Between);
+        final.y = Mathf.Lerp(first.y, second.y, Between);
+        final.z = Mathf.Lerp(first.z, second.z, Between);
+        return final;
+    }
+
+    void NewAnimation(float randomXValue, float randomZValue, float minAnimationFrame, float maxAnimationFrame) {
+        lastPosition = nextPosition;
+        float randomX = Random.Range(-randomXValue, randomXValue);
+        float randomZ = Random.Range(-randomZValue, randomZValue);
+        animationFrame = Random.Range(minAnimationFrame, maxAnimationFrame);
+        percentOfEndAnimation = 0;
+        nextPosition = new Vector3(randomX, 0, randomZ);
     }
 }

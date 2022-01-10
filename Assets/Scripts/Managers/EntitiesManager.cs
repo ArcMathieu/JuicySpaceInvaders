@@ -6,6 +6,8 @@ public class EntitiesManager : MonoBehaviour {
     public int enemyDirection = 1;
     public float distJump = 0;
     public bool newDirection = false;
+    public int enemiesX;
+    public int enemiesY;
 
     public PlayerController player;
     public Bullet bullet;
@@ -21,7 +23,7 @@ public class EntitiesManager : MonoBehaviour {
 
     public List<Enemy> enemies = new List<Enemy>();
     void Start() {
-        NewWave(7,5);
+        NewWave(enemiesX,enemiesY);
     }
 
     // Update is called once per frame
