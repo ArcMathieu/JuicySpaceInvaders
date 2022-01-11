@@ -30,9 +30,10 @@ public class PlayerController : MonoBehaviour {
     private int propulsionFrame = 0;
     [SerializeField]
     private int propulsionDist = 0;
+    [SerializeField]
+    private float shootTime = 1;
 
     private float shootTimer = 0;
-    private float shootTime = 1;
 
     private bool shoot = false;
     public GameObject[] bodies = new GameObject[0];

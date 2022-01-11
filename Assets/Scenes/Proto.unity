@@ -193,7 +193,7 @@ MonoBehaviour:
   uiManager: {fileID: 921560500}
   gameManager: {fileID: 1275420932}
   soundsManager: {fileID: 171949528}
-  decorManager: {fileID: 0}
+  decorsManager: {fileID: 0}
 --- !u!4 &102917693
 Transform:
   m_ObjectHideFlags: 0
@@ -5772,7 +5772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &203684826
 Transform:
   m_ObjectHideFlags: 0
@@ -13874,6 +13874,7 @@ MonoBehaviour:
   backBorder: {fileID: 1945428286}
   gameOver: {fileID: 709655219}
   Score: {fileID: 310985189}
+  Player: {fileID: 0}
 --- !u!4 &1275420933
 Transform:
   m_ObjectHideFlags: 0

@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour {
     BoxCollider bc;
     Rigidbody rb;
 
+    public bool hit = false; 
+
     public float bulletSpawnDist;
     void Start()
     {
@@ -115,8 +117,18 @@ public class Enemy : MonoBehaviour {
     IEnumerator Die() {
         die = true;
         rb.velocity = Vector3.zero;
+        Vector3 force = new Vector3(0,1,0);
+        force = force * 500;
+        rb.AddForce(force);
+        rb.useGravity = true;
         bc.isTrigger = true;
-        Vector3 force = new Vector3(0,0.2f,0);
+        hit = false;
+        while (hit != true) {
+            yield return null;
+        }
+        rb.velocity = Vector3.zero;
+        rb.useGravity = false;
+        force = new Vector3(0, 0, 1);
         force = force * 1000;
         rb.AddForce(force);
         yield return new WaitForSeconds(3);
@@ -160,5 +172,16 @@ public class Enemy : MonoBehaviour {
         animationFrame = Random.Range(minAnimationFrame, maxAnimationFrame);
         percentOfEndAnimation = 0;
         nextPosition = new Vector3(randomX, 0, randomZ);
+    }
+
+
+    private void OnCollisionEnter(Collision collision) {
+        
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (die && other.gameObject.tag == "Ground") {
+            hit = true;
+        }
     }
 }
