@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour {
     Vector3 nextPosition;
     float animationFrame;
     float percentOfEndAnimation;
+    public bool die = false;
 
     public GameObject[] bodies = new GameObject[0];
     [SerializeField]
@@ -54,20 +55,22 @@ public class Enemy : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.velocity = new Vector3(speed * direction, 0, 0);
-        if (direction != Gino.instance.entitiesManager.enemyDirection) {
-            direction = Gino.instance.entitiesManager.enemyDirection;
-            NextLine();
-        }
+        if (!die) {
+            rb.velocity = new Vector3(speed * direction, 0, 0);
+            if (direction != Gino.instance.entitiesManager.enemyDirection) {
+                direction = Gino.instance.entitiesManager.enemyDirection;
+                NextLine();
+            }
 
-        if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x +bc.size.x / 2 && Gino.instance.entitiesManager.enemyDirection == -1 ||
-             (Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x +bc.size.x / 2) && Gino.instance.entitiesManager.enemyDirection == 1) {
-            Gino.instance.entitiesManager.newDirection = true;
+            if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x +bc.size.x / 2 && Gino.instance.entitiesManager.enemyDirection == -1 ||
+                 (Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x +bc.size.x / 2) && Gino.instance.entitiesManager.enemyDirection == 1) {
+                Gino.instance.entitiesManager.newDirection = true;
+            }
+            if (transform.position.z < Gino.instance.entitiesManager.player.transform.position.z + Gino.instance.entitiesManager.player.transform.localScale.z / 2) {
+                Gino.instance.uiManager.GameOver();
+            }
+            Animation();
         }
-        if (transform.position.z < Gino.instance.entitiesManager.player.transform.position.z + Gino.instance.entitiesManager.player.transform.localScale.z / 2) {
-            Gino.instance.uiManager.GameOver();
-        }
-        Animation();
     }
 
     void NextLine() {
@@ -92,14 +95,14 @@ public class Enemy : MonoBehaviour {
     }
 
     public void NewState(bool nextState, State newState = State.DESTROYED) {
-        if (nextState) {
+        if (nextState && state != State.DESTROYED) {
             state--;
         } else {
             state = newState;
         }
 
         if (state == State.DESTROYED) {
-            Die();
+            StartCoroutine(Die());
         }
 
         NewBody((int)state);
@@ -109,7 +112,14 @@ public class Enemy : MonoBehaviour {
         NewState(true);
     }
 
-    public void Die() {
+    IEnumerator Die() {
+        die = true;
+        rb.velocity = Vector3.zero;
+        bc.isTrigger = true;
+        Vector3 force = new Vector3(0,0.1f,1);
+        force = force * 1000;
+        rb.AddForce(force);
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
         Gino.instance.entitiesManager.enemies.Remove(this);
     }
