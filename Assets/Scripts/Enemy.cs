@@ -116,10 +116,10 @@ public class Enemy : MonoBehaviour {
         die = true;
         rb.velocity = Vector3.zero;
         bc.isTrigger = true;
-        Vector3 force = new Vector3(0,0.1f,1);
+        Vector3 force = new Vector3(0,0.2f,0);
         force = force * 1000;
         rb.AddForce(force);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
         Gino.instance.entitiesManager.enemies.Remove(this);
     }

@@ -8,10 +8,10 @@ public class RoadMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Gino.instance.decorManager.decorSpeed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + DecorsManager.decorSpeed * Time.deltaTime);
         if (transform.position.z > 880f)
         {
-            Gino.instance.decorManager.SpawnRoad();
+            Gino.instance.decorsManager.SpawnRoad();
             Destroy(this.gameObject);
         }
     }

@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class LandScapeMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int id;
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - Gino.instance.decorManager.decorSpeed * Time.deltaTime);
-        if (transform.position.z < -20f)
-        {
-            Gino.instance.decorManager.SpawnRoad();
-            Destroy(this.gameObject);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - DecorsManager.decorSpeed * Time.deltaTime);
+    }
+
+    public void GoToTrash(int id) {
+        gameObject.SetActive(false);
+        transform.parent = Gino.instance.decorsManager.trashParent;
+        Gino.instance.decorsManager.trash[id].Add(this);
+    }
+
+    public void OnTriggerEnter(Collider other) {
+        if (other.GetComponent<Trasher>()) {
+            GoToTrash(id);
         }
     }
 }
