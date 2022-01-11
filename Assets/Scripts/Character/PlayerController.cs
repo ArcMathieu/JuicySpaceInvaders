@@ -155,6 +155,7 @@ public class PlayerController : MonoBehaviour {
         newBody.transform.position = transform.position + newBody.transform.localPosition;
         newBody.transform.eulerAngles = transform.eulerAngles + newBody.transform.localEulerAngles;
         newBody.transform.SetParent(transform);
+        newBody.transform.localScale = new Vector3(newBody.transform.localScale.x * transform.localScale.x, newBody.transform.localScale.y * transform.localScale.y, newBody.transform.localScale.z * transform.localScale.z);
         if (body != null) {
             body.SetActive(false);
             Destroy(body);

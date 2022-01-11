@@ -10,13 +10,6 @@ public class GameManager : MonoBehaviour
     public Transform backBorder;
     public Transform gameOver;
     public Transform Score;
-    public Transform Player;
-
-
-    void Start()
-    {
-        Player.localScale = new Vector3(2, 2, 2);
-    }
 
     //// Update is called once per frame
     //void Update()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DecorsManager : MonoBehaviour
 {
-    public static float decorSpeed;
+    public float decorSpeed;
     public Transform trashParent;
 
     [Header("ROAD")]
@@ -44,7 +44,7 @@ public class DecorsManager : MonoBehaviour
     }
 
     void Spawn(int listPosition) {
-        for (int i = 0; i < prefabsSpawn[listPosition].Count; i++) {
+        for (int i = 0; i < prefabsSpawn[0].Count; i++) {
             GameObject decors = NewOrTrash(listPosition);
             Vector3 newPosition = new Vector3(prefabsSpawn[listPosition][i].position.x, prefabsSpawn[listPosition][i].position.y, PropsSpawn.position.z);
             decors.transform.position = newPosition;

@@ -140,6 +140,7 @@ public class Enemy : MonoBehaviour {
         newBody.transform.position = transform.position;
         newBody.transform.eulerAngles = transform.eulerAngles + newBody.transform.eulerAngles;
         newBody.transform.SetParent(transform);
+        newBody.transform.localScale = new Vector3(newBody.transform.localScale.x * transform.localScale.x, newBody.transform.localScale.y * transform.localScale.y, newBody.transform.localScale.z * transform.localScale.z);
         if (body != null) {
             body.SetActive(false);
             Destroy(body);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1188.8291, g: 946.58594, b: 832.21826, a: 1}
+  m_IndirectSpecularColor: {r: 0.61596, g: 0.41999352, b: 0.52466404, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -614,7 +614,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109133429}
-  m_LocalRotation: {x: 0.5775896, y: 0.040638898, z: -0.028807595, w: 0.81480604}
+  m_LocalRotation: {x: 0.5775896, y: 0.040639017, z: -0.028807681, w: 0.81480604}
   m_LocalPosition: {x: -3, y: 150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -721,13 +721,13 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 96921.19
+  m_Intensity: 0.5
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 0.9
   m_LightUnit: 2
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
@@ -835,7 +835,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 96921.19
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -878,7 +878,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
+  m_ColorTemperature: 4546
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -892,13 +892,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112000406}
-  m_LocalRotation: {x: -0.12385972, y: -0.15993421, z: -0.19963215, w: -0.9587632}
+  m_LocalRotation: {x: -0.14132829, y: -0.21738546, z: -0.2250379, w: -0.9392167}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1958100558}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 10, y: -338.8, z: 25.4}
+  m_LocalEulerAnglesHint: {x: 9.65, y: -331.398, z: 29.414}
 --- !u!1 &118074618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,8 +1385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Profile: {fileID: 11400000, guid: 72329d075a656704994ac6d8abe3ca23, type: 2}
-  m_StaticLightingSkyUniqueID: 4
+  m_Profile: {fileID: 11400000, guid: 5dd6dc30e823f6143b05f7953164deb8, type: 2}
+  m_StaticLightingSkyUniqueID: 0
 --- !u!4 &298154043
 Transform:
   m_ObjectHideFlags: 1
@@ -8200,7 +8200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677143905}
-  m_LocalRotation: {x: 0.5775896, y: 0.040638898, z: -0.028807595, w: 0.81480604}
+  m_LocalRotation: {x: 0.5775896, y: 0.040638946, z: -0.028807633, w: 0.81480604}
   m_LocalPosition: {x: -3, y: 150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -14440,7 +14440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1154490795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14674,7 +14674,7 @@ Canvas:
   m_GameObject: {fileID: 1158160960}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 677143910}
   m_PlaneDistance: 10
   m_PixelPerfect: 0
@@ -16476,7 +16476,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 40000
+  m_Intensity: 12000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 10
@@ -16589,10 +16589,10 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.96825397, g: 1, b: 0, a: 1}
-  m_Intensity: 67947.97
-  m_Range: 15
-  m_SpotAngle: 50
+  m_Color: {r: 0.9725934, g: 1, b: 0.12641507, a: 1}
+  m_Intensity: 8163.342
+  m_Range: 10
+  m_SpotAngle: 80
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -16634,8 +16634,8 @@ Light:
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
   m_ColorTemperature: 9814
-  m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 0, y: NaN, z: 1.2135e-41, w: 6e-44}
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: -1.1258802e+32, z: 3.57e-43, w: 9e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -16733,15 +16733,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score : 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 44cf5cb075a220b489446cf4351e77ee, type: 2}
+  m_sharedMaterial: {fileID: 2164926484440575740, guid: 44cf5cb075a220b489446cf4351e77ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278255613
-  m_fontColor: {r: 0.992313, g: 1, b: 0, a: 1}
+  m_fontColor: {r: 0.99215686, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16758,15 +16758,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 50
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -18338,10 +18338,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d704d74c2bf38ae409ebdcee9aded69d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decorSpeed: 40
+  trashParent: {fileID: 0}
   roadParent: {fileID: 1999783911}
   roadPrefab: {fileID: 4038711629791882629, guid: ef8b9180464f8624cba6dd2fe8229613, type: 3}
   roadSpawn: {fileID: 1523967815}
+  PropsSpawn: {fileID: 0}
+  prefabsSpawnInstance: []
+  prefabsSpawnInstanceID: 
+  prefabs: []
+  timers: []
 --- !u!4 &1993174507
 Transform:
   m_ObjectHideFlags: 0
@@ -18502,7 +18507,7 @@ MonoBehaviour:
   uiManager: {fileID: 1948447000}
   gameManager: {fileID: 563879261}
   soundsManager: {fileID: 1479492206}
-  decorManager: {fileID: 1993174506}
+  decorsManager: {fileID: 0}
 --- !u!4 &2013859775
 Transform:
   m_ObjectHideFlags: 0

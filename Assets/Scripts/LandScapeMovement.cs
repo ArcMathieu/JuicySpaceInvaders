@@ -9,7 +9,7 @@ public class LandScapeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - DecorsManager.decorSpeed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Gino.instance.decorsManager.decorSpeed * Time.deltaTime);
     }
 
     public void GoToTrash(int id) {
@@ -19,7 +19,7 @@ public class LandScapeMovement : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider other) {
-        if (other.GetComponent<Trasher>()) {
+        if (other.gameObject.GetComponent<Trasher>()) {
             GoToTrash(id);
         }
     }
