@@ -17,13 +17,23 @@ public class DecorsManager : MonoBehaviour
 
     public List<Transform> prefabsSpawnInstance = new List<Transform>();
     public List<int> prefabsSpawnInstanceID = new List<int>();
-    public List<Transform>[] prefabsSpawn = new List<Transform>[0];
+    public List<Transform>[] prefabsSpawn;
     public LandScapeMovement[] prefabs = new LandScapeMovement[0];
     public Vector2[] timers = new Vector2[0];
-    public List<LandScapeMovement>[] trash = new List<LandScapeMovement>[0];
+    public List<LandScapeMovement>[] trash; 
 
     private void Start() {
+        prefabsSpawn =  new List<Transform>[100];
+        for (int i = 0; i < prefabsSpawn.Length; i++) {
+            prefabsSpawn[i] = new List<Transform>();
+        }
+        trash = new List<LandScapeMovement>[100];
+        for (int i = 0; i < trash.Length; i++) {
+            trash[i] = new List<LandScapeMovement>();
+        }
         for (int i = 0; i < prefabsSpawnInstance.Count; i++) {
+            Debug.Log(prefabsSpawnInstanceID[i]);
+            Debug.Log(prefabsSpawnInstance[i]);
             prefabsSpawn[prefabsSpawnInstanceID[i]].Add(prefabsSpawnInstance[i]);
         }
     }
@@ -44,11 +54,12 @@ public class DecorsManager : MonoBehaviour
     }
 
     void Spawn(int listPosition) {
-        for (int i = 0; i < prefabsSpawn[0].Count; i++) {
+        for (int i = 0; i < prefabsSpawn[listPosition].Count; i++) {
             GameObject decors = NewOrTrash(listPosition);
             Vector3 newPosition = new Vector3(prefabsSpawn[listPosition][i].position.x, prefabsSpawn[listPosition][i].position.y, PropsSpawn.position.z);
             decors.transform.position = newPosition;
-            decors.transform.rotation = PropsSpawn.rotation;
+            Vector3 newRotation = new Vector3(prefabsSpawn[listPosition][i].rotation.eulerAngles.x + decors.transform.rotation.eulerAngles.x, prefabsSpawn[listPosition][i].rotation.eulerAngles.y + decors.transform.rotation.eulerAngles.y, prefabsSpawn[listPosition][i].rotation.eulerAngles.z + decors.transform.rotation.eulerAngles.z); ;
+            decors.transform.rotation = Quaternion.Euler(newRotation);
         }
     }
 
