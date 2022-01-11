@@ -18,12 +18,12 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transitionDone = true;
+        transitionDone = false;
         cam1.m_Lens.FieldOfView = 40;
         cam1.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = 0;
 
-        //cam1.gameObject.SetActive(true);
-        //cam2.gameObject.SetActive(false);
+        cam1.gameObject.SetActive(true);
+        cam2.gameObject.SetActive(false);
 
         cam2.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = 1;
 
@@ -45,29 +45,28 @@ public class CameraManager : MonoBehaviour
 
     public void UnZoomToCam2()
     {
-        if(cam1.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition >= 1 && cam1.m_Lens.FieldOfView < 50)
-        {
-            cam1.m_Lens.FieldOfView += Time.deltaTime * 3;
-        }
-        if (cam1.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition >= 1 && cam1.m_Lens.FieldOfView >= 50)
+        if (cam1.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition >= 1)
         {
             cam1.gameObject.SetActive(false);
             cam2.gameObject.SetActive(true);
             transitionDone = true;
         }
     }
-
+    public float maxrange;
+    public CinemachineSmoothPath dollytrack;
     public void Cam2Movement()
     {
         if (InverseCam)
         {
-            pathPos = (player.position.x / -25) + 1;
+            pathPos = (player.position.x / -maxrange) + 1;
         }
         else
         {
-            pathPos = (player.position.x / 25) + 1;
+            pathPos = (player.position.x / maxrange) + 1;
         }
-            
+
+        if (pathPos < 0) pathPos = 0;
+        
         cam2.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = pathPos;
     }
 }

@@ -9,7 +9,7 @@ public class RoadMovement : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Gino.instance.decorManager.decorSpeed * Time.deltaTime);
-        if (transform.position.z > 296f)
+        if (transform.position.z > 880f)
         {
             Gino.instance.decorManager.SpawnRoad();
             Destroy(this.gameObject);
