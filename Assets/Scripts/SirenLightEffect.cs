@@ -11,12 +11,16 @@ public class SirenLightEffect : MonoBehaviour
     private Vector3 blueT;
 
     [SerializeField] int speed;
+    public int inSpeed = 0;
     [SerializeField] float lightRange;
     [SerializeField] float lightIntensity;
 
     float oldLightRange;
     float oldLightIntensity;
 
+    float rdn;
+    public float randomF;
+    bool startLight;
     private void Start()
     {
         oldLightRange = lightRange;
@@ -25,13 +29,22 @@ public class SirenLightEffect : MonoBehaviour
         blueLight.range = lightRange;
         redLight.intensity = lightIntensity;
         blueLight.intensity = lightIntensity;
+        randomF = Random.Range(0, 300);
     }
-
+    IEnumerator DecalStart()
+    {
+        yield return new WaitForSeconds(randomF/60);
+        inSpeed = speed;
+        startLight = true;
+    }
     // Update is called once per frame
     void Update()
     {
-        redT.y += speed * Time.deltaTime;
-        blueT.y -= speed * Time.deltaTime;
+        if (!startLight)
+            StartCoroutine(DecalStart());
+
+        redT.y += inSpeed * Time.deltaTime;
+        blueT.y -= inSpeed * Time.deltaTime;
         redT.x = 12;
         blueT.x = 12;
 
