@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject uiJuicyParent;
     public Image gameOver;
     public int score = 0;
     //public CameraController camera;

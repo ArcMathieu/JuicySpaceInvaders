@@ -18,7 +18,6 @@ public class CameraController : MonoBehaviour {
     void Start() {
         camTransform = gameObject.transform;
         originalPos = camTransform.localPosition;
-        NewCameraShake(5, 3);
     }
 
     void Update() {
