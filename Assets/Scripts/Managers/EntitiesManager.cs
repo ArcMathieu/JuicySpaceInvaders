@@ -21,6 +21,8 @@ public class EntitiesManager : MonoBehaviour {
     private float randomFactorX = 2f;
     private float randomFactorZ = 6f;
 
+    public Vector2 enemyHitCameraShake = Vector2.zero;
+
     public List<Enemy> enemies = new List<Enemy>();
     void Start() {
         NewWave(enemiesX,enemiesY);

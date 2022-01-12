@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+
+    public Vector2 shootShakeValue;
+    public Vector2 hitShakeValue;
     public enum State {
         NORMAL = 3,
         HIT1 = 2,
@@ -78,6 +81,7 @@ public class PlayerController : MonoBehaviour {
 
     void Shoot() {
         if (shoot && shootTimer <= 0) {
+            Gino.instance.cameraManager.NewCameraShake(shootShakeValue.x, shootShakeValue.y);
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + bulletSpawnDist);
             shootTimer = shootTime;
@@ -132,6 +136,7 @@ public class PlayerController : MonoBehaviour {
 
     public void NewState(bool nextState, State newState = State.HIT3) {
         if (nextState) {
+            Gino.instance.cameraManager.NewCameraShake(hitShakeValue.x, hitShakeValue.y);
             state--;
         } else {
             state = newState;

@@ -110,6 +110,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Hit() {
+        Gino.instance.cameraManager.NewCameraShake(Gino.instance.entitiesManager.enemyHitCameraShake.x, Gino.instance.entitiesManager.enemyHitCameraShake.y);
         if (!die) {
             NewState(true); 
         }
@@ -117,6 +118,7 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Die() {
         die = true;
+        Gino.instance.entitiesManager.enemies.Remove(this);
         GameObject particle = body.transform.GetChild(0).gameObject;
         particle.transform.parent = null;
         rb.velocity = Vector3.zero;
@@ -138,7 +140,6 @@ public class Enemy : MonoBehaviour {
         rb.AddForce(force);
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
-        Gino.instance.entitiesManager.enemies.Remove(this);
     }
     void NewBody(int newBodyRange) {
         GameObject newBody = Instantiate(bodies[newBodyRange]);

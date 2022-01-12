@@ -11,6 +11,7 @@ public class Gino : MonoBehaviour
     public SoundManager soundsManager;
     public DecorsManager decorsManager;
     public JuicyManager juicyManager;
+    public CameraManager cameraManager;
     void Awake()
     {
         instance = this;
