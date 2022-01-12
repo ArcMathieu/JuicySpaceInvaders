@@ -1,57 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4654587516191020549
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1be1b6c95cd2e41b27903b9270817f, type: 3}
-  m_Name: Vignette
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  mode:
-    m_OverrideState: 0
-    m_Value: 0
-  color:
-    m_OverrideState: 0
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
-    hdr: 0
-    showAlpha: 0
-    showEyeDropper: 1
-  center:
-    m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.5}
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.3
-    min: 0
-    max: 1
-  smoothness:
-    m_OverrideState: 0
-    m_Value: 0.2
-    min: 0.01
-    max: 1
-  roundness:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 1
-  rounded:
-    m_OverrideState: 0
-    m_Value: 0
-  mask:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-  opacity:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 1
 --- !u!114 &-1595958342205905299
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -64,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
   m_Name: HDRISky
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   rotation:
     m_OverrideState: 1
@@ -105,7 +53,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {fileID: 8900000, guid: b406336c2c5283b4c92cf9faf5344b52, type: 3}
   enableDistortion:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   procedural:
     m_OverrideState: 0
@@ -190,7 +138,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   skyType:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 4
   skyAmbientMode:
     m_OverrideState: 1
     m_Value: 1
@@ -215,7 +163,6 @@ MonoBehaviour:
   - {fileID: 4888127169650870143}
   - {fileID: 2613527525918792309}
   - {fileID: 8799128190084578253}
-  - {fileID: -4654587516191020549}
 --- !u!114 &2613527525918792309
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -228,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953beb541740ddc499d005ee80c9ff29, type: 3}
   m_Name: Fog
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 0
@@ -237,7 +184,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   colorMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   color:
     m_OverrideState: 0
@@ -246,8 +193,8 @@ MonoBehaviour:
     showAlpha: 0
     showEyeDropper: 1
   tint:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.3351353, b: 0, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -276,10 +223,10 @@ MonoBehaviour:
     m_Value: 50
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 100
+    m_Value: 200
     min: 1
   enableVolumetricFog:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   albedo:
     m_OverrideState: 0
