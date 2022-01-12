@@ -32,8 +32,6 @@ public class DecorsManager : MonoBehaviour
             trash[i] = new List<LandScapeMovement>();
         }
         for (int i = 0; i < prefabsSpawnInstance.Count; i++) {
-            Debug.Log(prefabsSpawnInstanceID[i]);
-            Debug.Log(prefabsSpawnInstance[i]);
             prefabsSpawn[prefabsSpawnInstanceID[i]].Add(prefabsSpawnInstance[i]);
         }
     }
@@ -55,20 +53,22 @@ public class DecorsManager : MonoBehaviour
 
     void Spawn(int listPosition) {
         for (int i = 0; i < prefabsSpawn[listPosition].Count; i++) {
-            GameObject decors = NewOrTrash(listPosition);
+            LandScapeMovement decors = NewOrTrash(listPosition);
             Vector3 newPosition = new Vector3(prefabsSpawn[listPosition][i].position.x, prefabsSpawn[listPosition][i].position.y, PropsSpawn.position.z);
             decors.transform.position = newPosition;
-            Vector3 newRotation = new Vector3(prefabsSpawn[listPosition][i].rotation.eulerAngles.x + decors.transform.rotation.eulerAngles.x, prefabsSpawn[listPosition][i].rotation.eulerAngles.y + decors.transform.rotation.eulerAngles.y, prefabsSpawn[listPosition][i].rotation.eulerAngles.z + decors.transform.rotation.eulerAngles.z); ;
+            Vector3 newRotation = new Vector3(prefabsSpawn[listPosition][i].rotation.eulerAngles.x + prefabs[listPosition].transform.rotation.eulerAngles.x, prefabsSpawn[listPosition][i].rotation.eulerAngles.y + prefabs[listPosition].transform.rotation.eulerAngles.y, prefabsSpawn[listPosition][i].rotation.eulerAngles.z + prefabs[listPosition].transform.rotation.eulerAngles.z); ;
             decors.transform.rotation = Quaternion.Euler(newRotation);
+            decors.id = listPosition;
         }
     }
 
-    GameObject NewOrTrash(int listPosition) {
+    LandScapeMovement NewOrTrash(int listPosition) {
         if (trash[listPosition].Count == 0) {
-            return Instantiate(prefabs[listPosition].gameObject);
+            return Instantiate(prefabs[listPosition]);
         } else {
-            GameObject lastTrash = trash[listPosition][0].gameObject;
+            LandScapeMovement lastTrash = trash[listPosition][0];
             trash[listPosition].RemoveAt(0);
+            lastTrash.gameObject.SetActive(true);
             return lastTrash;
         }
     }

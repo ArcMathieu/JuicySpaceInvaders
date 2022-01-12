@@ -21,8 +21,6 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.GetComponent<Enemy>()) {
             other.gameObject.GetComponent<Enemy>().Hit();
-        }
-        if (!other.gameObject.GetComponent<PlayerController>()) {
             Die();
         }
     }

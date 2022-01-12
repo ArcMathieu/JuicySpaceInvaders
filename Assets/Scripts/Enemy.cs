@@ -93,7 +93,6 @@ public class Enemy : MonoBehaviour {
             newRotation.eulerAngles = new Vector3 (-90, 0, 0);
             bullet.transform.rotation = newRotation;
         }
-        Debug.Log("shoot");
     }
 
     public void NewState(bool nextState, State newState = State.DESTROYED) {
@@ -111,25 +110,31 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Hit() {
-        NewState(true);
+        if (!die) {
+            NewState(true); 
+        }
     }
 
     IEnumerator Die() {
         die = true;
+        GameObject particle = body.transform.GetChild(0).gameObject;
+        particle.transform.parent = null;
         rb.velocity = Vector3.zero;
         Vector3 force = new Vector3(0,1,0);
-        force = force * 500;
+        force = force * 700;
         rb.AddForce(force);
         rb.useGravity = true;
         bc.isTrigger = true;
         hit = false;
+        yield return new WaitForSeconds(1f);
+        Destroy(particle);
         while (hit != true) {
             yield return null;
         }
         rb.velocity = Vector3.zero;
         rb.useGravity = false;
         force = new Vector3(0, 0, 1);
-        force = force * 1000;
+        force = force * 2000;
         rb.AddForce(force);
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
@@ -175,10 +180,6 @@ public class Enemy : MonoBehaviour {
         nextPosition = new Vector3(randomX, 0, randomZ);
     }
 
-
-    private void OnCollisionEnter(Collision collision) {
-        
-    }
 
     private void OnTriggerEnter(Collider other) {
         if (die && other.gameObject.tag == "Ground") {

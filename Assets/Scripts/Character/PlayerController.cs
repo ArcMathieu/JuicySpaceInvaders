@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour {
     void Shoot() {
         if (shoot && shootTimer <= 0) {
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
-            newBullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + bulletSpawnDist);
+            newBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + bulletSpawnDist);
             shootTimer = shootTime;
             StartCoroutine(Propulsion(propulsionFrame, propulsionDist));
         } else {
@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour {
             transform.position += new Vector3 (0,0, jump);
             time++;
             yield return null;
-            Debug.Log(jump);
         }
         jump = jumpSize / (frame * 2);
         while (time < frame) {

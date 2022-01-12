@@ -18,10 +18,8 @@ public class EnemyBullet : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.GetComponent<PlayerController>()) {
             other.gameObject.GetComponent<PlayerController>().Hit();
-
-        }
-        if (!other.gameObject.GetComponent<Enemy>()) {
             Destroy(gameObject);
+
         }
     }
 }

@@ -12,7 +12,7 @@ public class LandScapeMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Gino.instance.decorsManager.decorSpeed * Time.deltaTime);
     }
 
-    public void GoToTrash(int id) {
+    public void GoToTrash() {
         gameObject.SetActive(false);
         transform.parent = Gino.instance.decorsManager.trashParent;
         Gino.instance.decorsManager.trash[id].Add(this);
@@ -20,7 +20,7 @@ public class LandScapeMovement : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) {
         if (other.gameObject.GetComponent<Trasher>()) {
-            GoToTrash(id);
+            GoToTrash();
         }
     }
 }

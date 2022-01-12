@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 3872972280970318419}
   - component: {fileID: 1322783462049670809}
   - component: {fileID: 3508667620004556960}
+  - component: {fileID: 6836773119165244519}
   m_Layer: 0
   m_Name: StreetLamp
   m_TagString: Untagged
@@ -312,3 +313,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+--- !u!65 &6836773119165244519
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674278790655166284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.062525325, y: 0.019999996, z: 0.28370854}
+  m_Center: {x: 0.02126266, y: 0.0000000018626449, z: -0.13185428}
