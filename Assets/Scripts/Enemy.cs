@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour {
     public bool hit = false; 
 
     public float bulletSpawnDist;
+    public GameObject explosion;
     void Start()
     {
         minAnimationFrame = animationMinSeconds * 50f;
@@ -52,7 +53,7 @@ public class Enemy : MonoBehaviour {
         rb.velocity = new Vector3(speed * direction, 0, 0);
         NewBody(bodies.Length - 1);
         NewAnimation(randomXValue, randomZValue, minAnimationFrame, maxAnimationFrame);
-    }
+}
 
     // Update is called once per frame
     void FixedUpdate()
@@ -121,6 +122,7 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Die() {
         die = true;
+        Instantiate(explosion, transform.position + Vector3.up * 2, Quaternion.identity);
         Gino.instance.cameraManager.NewCameraShake(1, 2);
         Gino.instance.entitiesManager.enemies.Remove(this);
        // GameObject particle = body.transform.GetChild(0).gameObject;

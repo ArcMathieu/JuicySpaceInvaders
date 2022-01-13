@@ -75,6 +75,7 @@ MonoBehaviour:
   body: {fileID: 0}
   hit: 0
   bulletSpawnDist: 0.8
+  explosion: {fileID: 5145826295432097769, guid: fa30a5cdaa938b14cb81e1bd10464e1e, type: 3}
 --- !u!54 &6274045132404952930
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1649937165064135311}
   - component: {fileID: 2398758928974605610}
   - component: {fileID: 481583621434710496}
-  - component: {fileID: 1435593217440313852}
   m_Layer: 0
   m_Name: Police_car_Destroyed
   m_TagString: Untagged
@@ -103,19 +102,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1435593217440313852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138666323812333621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6883ce38ca2dec5489f4927026b6a059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion: {fileID: 5145826295432097769, guid: fa30a5cdaa938b14cb81e1bd10464e1e, type: 3}
 --- !u!1001 &2299920535012797777
 PrefabInstance:
   m_ObjectHideFlags: 0
