@@ -24,4 +24,8 @@ public class UIManager : MonoBehaviour
             lifes[i].gameObject.GetComponent<Animator>().SetTrigger("hit");
         }
     }
+
+    public void StopTime() {
+        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+    }
 }
