@@ -75,7 +75,6 @@ public class EntitiesManager : MonoBehaviour {
     {
         alreadyStarted = true;
         distJump = 20;
-        Debug.Log("fefef");
         yield return new WaitForSeconds(4);
         distJump = 2.3f;
         isGameStart = true;

@@ -71,7 +71,8 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
         Shoot();
-        Movement();
+        if(lifePoint >= 0)
+            Movement();
     }
 
     void Movement()
@@ -185,12 +186,10 @@ public class PlayerController : MonoBehaviour
 
     public void Hit()
     {
+        ChangeLifePoint(-1);
+        Gino.instance.uiManager.LoseLife((int)state);
         if (state != State.HIT3)
-        {
-            ChangeLifePoint(-1);
             NewState(true);
-            Gino.instance.uiManager.LoseLife((int)state);
-        }
         else GameManager.instance.LaunchGameOver();
     }
 

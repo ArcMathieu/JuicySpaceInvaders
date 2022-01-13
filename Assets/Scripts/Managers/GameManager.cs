@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator waitToSpawnPlayer()
     {
-        yield return new WaitForSeconds(4.2f);
+        yield return new WaitForSeconds(4.4f);
         PlayerPrefs = Instantiate(PlayerPrefs, Vector3.zero, new Quaternion(0,180,0,0), BarrageAnim.transform);
         isStart = true;
     }

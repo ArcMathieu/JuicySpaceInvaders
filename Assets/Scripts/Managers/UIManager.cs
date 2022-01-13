@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 
     public void LoseLife(int life) {
         for (int i = lifes.Length - 1; i > life - 1; i--) {
-            lifes[i].gameObject.SetActive(false);
+            lifes[i].gameObject.GetComponent<Animator>().SetTrigger("hit");
         }
     }
 }
