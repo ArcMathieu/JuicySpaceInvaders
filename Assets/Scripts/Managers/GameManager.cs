@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            LaunchGame();
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    LaunchGame();
     }
 
     public void LaunchGame()
@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
     IEnumerator waitToSpawnPlayer()
     {
         yield return new WaitForSeconds(4);
-        Instantiate(PlayerPrefs, Vector3.zero, Quaternion.identity, BarrageAnim.transform);
+        PlayerPrefs = Instantiate(PlayerPrefs, Vector3.zero, Quaternion.identity, BarrageAnim.transform);
+        PlayerPrefs.transform.position = new Vector3(0, 0, 0);
     }
     
     public void LaunchGameOver()
