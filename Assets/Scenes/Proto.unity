@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0859704, g: 0.07178843, b: 0.056030273, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5996,6 +5996,22 @@ MonoBehaviour:
     leadTo: 0
     nextSound: 
     source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 3ce1c3b163bfc8846a91f7a9e4651a20, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    leadTo: 0
+    nextSound: 
+    source: {fileID: 0}
+  - name: Hit
+    clip: {fileID: 8300000, guid: e95b2b65c3d47594ebebae0fc42b0533, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    leadTo: 0
+    nextSound: 
+    source: {fileID: 0}
   music:
   - name: Action Music V1
     clip: {fileID: 8300000, guid: af18062770a89dc49a31fa24adeb89c5, type: 3}
@@ -6334,7 +6350,7 @@ MonoBehaviour:
   - {x: 0, y: 0.8}
   - {x: 0, y: 2.87}
   - {x: 0, y: 0.35}
-  - {x: 0, y: 2.959}
+  - {x: 0, y: 2.9515}
 --- !u!1 &208741969
 GameObject:
   m_ObjectHideFlags: 0
@@ -6888,7 +6904,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390622453}
-  m_LocalRotation: {x: 0.5775896, y: 0.040638898, z: -0.028807595, w: 0.81480604}
+  m_LocalRotation: {x: 0.5775896, y: 0.040638916, z: -0.02880761, w: 0.81480604}
   m_LocalPosition: {x: -3, y: 150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7150,7 +7166,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518025445}
-  m_LocalRotation: {x: 0.5775896, y: 0.040638898, z: -0.028807595, w: 0.81480604}
+  m_LocalRotation: {x: 0.5775896, y: 0.040638916, z: -0.02880761, w: 0.81480604}
   m_LocalPosition: {x: -3, y: 150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -15103,6 +15119,18 @@ MonoBehaviour:
       - m_Target: {fileID: 73987080}
         m_TargetAssemblyTypeName: MenuUIAnimController, Assembly-CSharp
         m_MethodName: ShowMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 921560500}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: StopTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

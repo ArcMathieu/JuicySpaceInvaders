@@ -9905,8 +9905,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3309044, y: 1.3700668, z: 2.118599}
-  m_Center: {x: -0.03853458, y: 0.6453683, z: 0.10725403}
+  m_Size: {x: 1.4457273, y: 1.370067, z: 2.1641111}
+  m_Center: {x: 0.055756412, y: 0.6453683, z: -0.11650531}
 --- !u!54 &2187276518157679929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9954,6 +9954,7 @@ MonoBehaviour:
   - {fileID: 7645584493164240499, guid: e99120ce33e0b2048b96daaeff173ad4, type: 3}
   body: {fileID: 0}
   bulletSpawnDist: 1
+  canMove: 0
 --- !u!95 &745835664313506390
 Animator:
   serializedVersion: 3
