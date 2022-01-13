@@ -94,9 +94,8 @@ public class CameraManager : MonoBehaviour
                 if (shakes[i].currentShakeDuration < 0) {
                     shakes[i].currentShakeDuration = 0;
                 }
-                float durationRemaining = Mathf.Clamp01(shakes[i].currentShakeDuration);
-                float shakeValue = Mathf.Lerp(shakes[i].shakeAmount, 0, durationRemaining);
-                shakes[i].currentShakeAmount = curve.Evaluate(shakeValue);
+                float shakeValue = Mathf.Lerp(shakes[i].shakeDuration, 0, shakes[i].currentShakeDuration);
+                shakes[i].currentShakeAmount = shakes[i].shakeAmount * curve.Evaluate(shakeValue);
                 if (shakes[i].currentShakeAmount > mainAmount) {
                     mainAmount = shakes[i].currentShakeAmount;
                 }

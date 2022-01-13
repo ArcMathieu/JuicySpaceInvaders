@@ -121,18 +121,19 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Die() {
         die = true;
+        Gino.instance.cameraManager.NewCameraShake(1, 2);
         Gino.instance.entitiesManager.enemies.Remove(this);
-        GameObject particle = body.transform.GetChild(0).gameObject;
-        particle.transform.parent = null;
+       // GameObject particle = body.transform.GetChild(0).gameObject;
+       // particle.transform.parent = null;
         rb.velocity = Vector3.zero;
-        Vector3 force = new Vector3(0,1,0);
+        Vector3 force = new Vector3(0, 1, 0.5f);
         force = force * 700;
         rb.AddForce(force);
         rb.useGravity = true;
         bc.isTrigger = true;
         hit = false;
         yield return new WaitForSeconds(1f);
-        Destroy(particle);
+    //    Destroy(particle);
         while (hit != true) {
             yield return null;
         }
