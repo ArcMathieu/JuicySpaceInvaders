@@ -32,6 +32,7 @@ public class EntitiesManager : MonoBehaviour {
     void LateUpdate() {
         NewDirection();
         ShootTimer();
+        if (GameManager.instance.isStart && !alreadyStarted) StartCoroutine(moveFastForward());
     }
 
     void NewWave(int enemyEachLine, int lines) {
@@ -67,15 +68,33 @@ public class EntitiesManager : MonoBehaviour {
             newDirection = false;
         }
     }
+    bool isGameStart;
+    bool alreadyStarted;
 
+    IEnumerator moveFastForward()
+    {
+        alreadyStarted = true;
+        distJump = 20;
+        Debug.Log("fefef");
+        yield return new WaitForSeconds(4);
+        distJump = 2.3f;
+        isGameStart = true;
+    }
     void ShootTimer() {
-        if(timeBetweenShootTimer < 0) {
-            timeBetweenShootTimer = timeBetweenShoot;
-            Shoot();
+        if (isGameStart)
+        {
+            if (timeBetweenShootTimer < 0)
+            {
+                timeBetweenShootTimer = timeBetweenShoot;
+                Shoot();
 
-        } else {
-            timeBetweenShootTimer -= Time.deltaTime;
+            }
+            else
+            {
+                timeBetweenShootTimer -= Time.deltaTime;
+            }
         }
+        
     }
 
     void Shoot() {

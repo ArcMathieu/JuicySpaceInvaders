@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     public Vector2 shootShakeValue;
     public Vector2 hitShakeValue;
-    public enum State {
+    public enum State
+    {
         NORMAL = 3,
         HIT1 = 2,
         HIT2 = 1,
@@ -46,7 +48,8 @@ public class PlayerController : MonoBehaviour {
     BoxCollider bc;
 
     public float bulletSpawnDist;
-    void Start() {
+    void Start()
+    {
         NewBody(bodies.Length - 1);
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
@@ -54,12 +57,16 @@ public class PlayerController : MonoBehaviour {
     bool canMove;
     bool alreadySpawn;
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         #region Input
         direction = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown("space")) {
+        if (Input.GetKeyDown("space"))
+        {
             shoot = true;
-        } else {
+        }
+        else
+        {
             shoot = false;
         }
         #endregion
@@ -67,46 +74,61 @@ public class PlayerController : MonoBehaviour {
         Movement();
     }
 
-    void Movement() {
-        if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x + bc.size.x / 2 && direction <= 0){
+    void Movement()
+    {
+        transform.position = new Vector3(transform.position.x, 0, 0);
+        if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x + bc.size.x / 2 && direction <= 0)
+        {
             rb.velocity = new Vector3(0, 0, 0);
             transform.position = new Vector3(Gino.instance.gameManager.leftBorder.transform.position.x - bc.size.x / 2, transform.position.y, transform.position.z);
-        }else if(Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x + bc.size.x / 2 && direction >= 0) {
+        }
+        else if (Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x + bc.size.x / 2 && direction >= 0)
+        {
             rb.velocity = new Vector3(0, 0, 0);
             transform.position = new Vector3(Gino.instance.gameManager.rightBorder.transform.position.x - bc.size.x / 2, transform.position.y, transform.position.z);
-        } else {
+        }
+        else
+        {
             rb.velocity = new Vector3(characterHorizontalSpeed * direction, 0, 0);
         }
-        if (Gino.instance.juicyManager.isMovement) {
+        if (Gino.instance.juicyManager.isMovement)
+        {
             RotateDeltaTime();
         }
     }
 
-    void Shoot() {
-        if (shoot && shootTimer <= 0) {
+    void Shoot()
+    {
+        if (shoot && shootTimer <= 0)
+        {
             Gino.instance.soundsManager.Play("Shoot Player");
             Gino.instance.cameraManager.NewCameraShake(shootShakeValue.x, shootShakeValue.y);
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + bulletSpawnDist);
             shootTimer = shootTime;
             StartCoroutine(Propulsion(propulsionFrame, propulsionDist));
-        } else {
+        }
+        else
+        {
             shootTimer -= Time.deltaTime;
         }
     }
 
-    IEnumerator Propulsion(float frame, int jumpSize) {
+    IEnumerator Propulsion(float frame, int jumpSize)
+    {
         float jump = 0;
         Vector3 position = transform.position;
         int time = 0;
         jump = -jumpSize / (frame * 2);
-        while (time < frame / 2) {
-            transform.position += new Vector3 (0,0, jump);
+        while (time < frame / 2)
+        {
+            transform.position += new Vector3(0, 0, jump);
             time++;
             yield return null;
         }
         jump = jumpSize / (frame * 2);
-        while (time < frame) {
+        while (time < frame)
+        {
             transform.position += new Vector3(0, 0, jump);
             time++;
             yield return null;
@@ -114,57 +136,73 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    private void RotateDeltaTime() {
+    private void RotateDeltaTime()
+    {
         float newAngle = 0.5f;
         float lastAngle = Mathf.InverseLerp(180 - maxAngleRotation, 180 + maxAngleRotation, transform.localEulerAngles.y);
-        if (direction == 0) {
-            if (lastAngle != 0.5f) {
+        if (direction == 0)
+        {
+            if (lastAngle != 0.5f)
+            {
                 newAngle = Mathf.Clamp(Time.deltaTime * -Mathf.Sign(lastAngle - 0.5f) * characterAngularSpeedComeback / 2 + lastAngle, 0, 1);
-                if (Mathf.Lerp(180 - maxAngleRotation, 180 + maxAngleRotation, newAngle) > 180 - minAngleRotation && Mathf.Lerp(180 - maxAngleRotation, 180 + maxAngleRotation, newAngle) < 180 + minAngleRotation || Mathf.Sign(newAngle - 0.5f) != Mathf.Sign(lastAngle - 0.5f)) {
+                if (Mathf.Lerp(180 - maxAngleRotation, 180 + maxAngleRotation, newAngle) > 180 - minAngleRotation && Mathf.Lerp(180 - maxAngleRotation, 180 + maxAngleRotation, newAngle) < 180 + minAngleRotation || Mathf.Sign(newAngle - 0.5f) != Mathf.Sign(lastAngle - 0.5f))
+                {
                     newAngle = 0.5f;
                 }
             }
 
-        } else {
-            newAngle = Time.deltaTime * -direction * characterAngularSpeed / 2  + Mathf.InverseLerp(180 - maxAngleRotation, 180 + maxAngleRotation, transform.localEulerAngles.y);
         }
-        transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 180 - maxAngleRotation, 0) , Quaternion.Euler(0,180 + maxAngleRotation,0), newAngle);
+        else
+        {
+            newAngle = Time.deltaTime * -direction * characterAngularSpeed / 2 + Mathf.InverseLerp(180 - maxAngleRotation, 180 + maxAngleRotation, transform.localEulerAngles.y);
+        }
+        transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 180 - maxAngleRotation, 0), Quaternion.Euler(0, 180 + maxAngleRotation, 0), newAngle);
     }
 
-    public void ChangeLifePoint(int changeLifePoint) {
+    public void ChangeLifePoint(int changeLifePoint)
+    {
         lifePoint += changeLifePoint;
-        if (lifePoint < 1) {
+        if (lifePoint < 1)
+        {
             Gino.instance.uiManager.GameOver();
         }
     }
 
-    public void NewState(bool nextState, State newState = State.HIT3) {
-        if (nextState) {
+    public void NewState(bool nextState, State newState = State.HIT3)
+    {
+        if (nextState)
+        {
             Gino.instance.cameraManager.NewCameraShake(hitShakeValue.x, hitShakeValue.y);
             state--;
-        } else {
+        }
+        else
+        {
             state = newState;
         }
 
-        if (state == State.HIT3) {
-            Gino.instance.uiManager.GameOver();
-        }
         NewBody((int)state);
     }
 
-    public void Hit() {
-        ChangeLifePoint(-1);
-        NewState(true);
-        Gino.instance.uiManager.LoseLife((int)state);
+    public void Hit()
+    {
+        if (state != State.HIT3)
+        {
+            ChangeLifePoint(-1);
+            NewState(true);
+            Gino.instance.uiManager.LoseLife((int)state);
+        }
+        else GameManager.instance.LaunchGameOver();
     }
 
-    void NewBody(int newBodyRange) {
+    void NewBody(int newBodyRange)
+    {
         GameObject newBody = Instantiate(bodies[newBodyRange]);
         newBody.transform.position = transform.position + newBody.transform.localPosition;
         newBody.transform.eulerAngles = transform.eulerAngles + newBody.transform.localEulerAngles;
         newBody.transform.SetParent(transform);
         newBody.transform.localScale = new Vector3(newBody.transform.localScale.x * transform.localScale.x, newBody.transform.localScale.y * transform.localScale.y, newBody.transform.localScale.z * transform.localScale.z);
-        if (body != null) {
+        if (body != null)
+        {
             body.SetActive(false);
             Destroy(body);
         }

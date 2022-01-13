@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08589393, g: 0.071480036, b: 0.0556733, a: 1}
+  m_IndirectSpecularColor: {r: 0.085749865, g: 0.071312964, b: 0.055532277, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6666,7 +6666,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390622453}
-  m_LocalRotation: {x: 0.5775896, y: 0.040638983, z: -0.028807657, w: 0.81480604}
+  m_LocalRotation: {x: 0.5775896, y: 0.040638916, z: -0.02880761, w: 0.81480604}
   m_LocalPosition: {x: -3, y: 150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9413,7 +9413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiJuicyParent: {fileID: 284795655}
-  gameOver: {fileID: 0}
+  gameOver: {fileID: 82507397}
   score: 0
   lifes:
   - {fileID: 487137368}
@@ -22790,7 +22790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDirection: 1
-  distJump: 2.3
+  distJump: 0
   newDirection: 0
   enemiesX: 7
   enemiesY: 5

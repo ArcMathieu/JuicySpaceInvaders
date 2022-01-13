@@ -10,16 +10,6 @@ public class UIManager : MonoBehaviour
     public int score = 0;
     //public CameraController camera;
     public Image[] lifes = new Image[0];
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void GameOver() {
         gameOver.gameObject.SetActive(true);

@@ -39,14 +39,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator waitToSpawnPlayer()
     {
-        yield return new WaitForSeconds(4);
-        PlayerPrefs = Instantiate(PlayerPrefs, Vector3.zero, Quaternion.identity, BarrageAnim.transform);
-        PlayerPrefs.transform.position = new Vector3(0, 0, 0);
+        yield return new WaitForSeconds(4.2f);
+        PlayerPrefs = Instantiate(PlayerPrefs, Vector3.zero, new Quaternion(0,180,0,0), BarrageAnim.transform);
+        isStart = true;
     }
     
     public void LaunchGameOver()
     {
         //arreter enemies + decor
+        Gino.instance.decorsManager.decorSpeed = Mathf.Lerp(Gino.instance.decorsManager.decorSpeed, 0, 1);
+        Gino.instance.entitiesManager.distJump = 0;
         gameOver.GetComponent<Animator>().SetBool("GO", true);
         Score.GetComponent<Animator>().SetTrigger("GameOver");
     }
