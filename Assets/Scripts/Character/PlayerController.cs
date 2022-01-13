@@ -188,6 +188,7 @@ public class PlayerController : MonoBehaviour
     {
         ChangeLifePoint(-1);
         Gino.instance.uiManager.LoseLife((int)state);
+        Gino.instance.soundsManager.Play("Hit");
         if (state != State.HIT3)
             NewState(true);
         else GameManager.instance.LaunchGameOver();

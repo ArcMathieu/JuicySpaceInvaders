@@ -122,6 +122,7 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Die() {
         die = true;
+        Gino.instance.soundsManager.Play("Explosion");
         Instantiate(explosion, transform.position + Vector3.up * 2, Quaternion.identity);
         Gino.instance.cameraManager.NewCameraShake(1, 2);
         Gino.instance.entitiesManager.enemies.Remove(this);
