@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DecorsManager : MonoBehaviour
 {
-    public float decorSpeed;
+    [HideInInspector] public float decorSpeed;
+    public float decorMaxSpeed;
     public Transform trashParent;
 
     [Header("ROAD")]
@@ -34,6 +35,7 @@ public class DecorsManager : MonoBehaviour
         for (int i = 0; i < prefabsSpawnInstance.Count; i++) {
             prefabsSpawn[prefabsSpawnInstanceID[i]].Add(prefabsSpawnInstance[i]);
         }
+        decorSpeed = decorMaxSpeed;
     }
     public void SpawnRoad()
     {

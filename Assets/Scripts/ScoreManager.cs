@@ -8,12 +8,11 @@ public class ScoreManager : MonoBehaviour
 {
     private int currentScore;
     private TMP_Text scoreText;
-    public Animator ScoreT;
+    public MenuUIAnimController ScoreT;
     // Start is called before the first frame update
     void Start()
     {
         scoreText = GetComponent<TMP_Text>();
-        ScoreT = GetComponent<Animator>();
         Reset();
     }
 
@@ -37,7 +36,7 @@ public class ScoreManager : MonoBehaviour
 
     private void AddScore(int amount)
     {
-        ScoreT.SetTrigger("Add");
+        ScoreT.AddScoreAnim();
         currentScore += amount;
     }
 }
