@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         if (shoot && shootTimer <= 0)
         {
+            transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
             Gino.instance.soundsManager.Play("Shoot Player");
             Gino.instance.cameraManager.NewCameraShake(shootShakeValue.x, shootShakeValue.y);
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
