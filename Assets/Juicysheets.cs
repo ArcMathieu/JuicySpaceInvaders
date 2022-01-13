@@ -5,31 +5,50 @@ using TMPro;
 
 public class Juicysheets : MonoBehaviour
 {
-    public List<GameObject> buttons = new List<GameObject>();
-    public List<string> buttonsName = new List<string>();
-    public Dictionary<string, GameObject> BtnDico = new Dictionary<string, GameObject>();
-    public Transform parentSheet;
+    //public int nbButton;
+    //public GameObject boxPrefab;
+    //public List<GameObject> buttons = new List<GameObject>();
+    //public List<string> buttonsName = new List<string>();
+    //public Transform parentSheet;
     // Start is called before the first frame update
     void Start()
     {
-        if(buttons.Count == buttonsName.Count)
-        {
-            for (int i = 0; i < buttons.Count; i++)
-            {
-                Instantiate(buttons[i], parentSheet.position, parentSheet.rotation, parentSheet);
-            }
-            for (int i = 0; i < buttonsName.Count; i++)
-            {
-                Debug.Log(buttons[i].GetComponentInChildren<GameObject>().name);
-                buttons[i].GetComponentInChildren<TextMeshPro>().text = buttonsName[i];
-            }
-        }
+        //if(nbButton == buttonsName.Count)
+        //{
+        //    for (int i = 0; i < nbButton; i++)
+        //    {
+        //        buttons.Add(Instantiate(boxPrefab, parentSheet.position, parentSheet.rotation, parentSheet));
+        //        buttons[i].transform.GetChild(0).GetComponent<TMP_Text>().text = buttonsName[i];
+        //    }
+        //}
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SwapEffect(string name)
     {
-        
+        switch (name)
+        {
+            case "particules":
+                //fonction desactive particules*
+
+                break;
+            case "ui":
+                //fonction desactive ui
+                break;
+            case "lights":
+                //fonction desactive light
+                break;
+            case "anims":
+                //fonction desactive animations
+                break;
+            case "cam":
+                //fonction desactive cam movement
+                break;
+            case "all":
+                //fonction desactive tout
+                break;
+            default:
+                break;
+        }
     }
 }

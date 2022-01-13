@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
     }
-
+    bool canMove;
+    bool alreadySpawn;
     // Update is called once per frame
     void Update() {
         #region Input
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour {
         }
         #endregion
         Shoot();
-        Movement();   
+        Movement();
     }
 
     void Movement() {
