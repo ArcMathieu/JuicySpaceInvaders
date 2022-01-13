@@ -78,5 +78,8 @@ public class JuicyManager : MonoBehaviour
     public void CameraSwitch() {
         isCamera = !isCamera;
     }
-
+    public void AllSwitch()
+    {
+        //isCamera = !isCamera;
+    }
 }

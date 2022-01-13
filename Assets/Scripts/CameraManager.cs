@@ -9,10 +9,12 @@ public class CameraManager : MonoBehaviour
     public CinemachineVirtualCamera cam2;
 
     public Transform player;
+    public Transform targetCam;
     
     public bool InverseCam;
 
     public bool transitionDone;
+    public bool transitionZoom;
     private float pathPos;
 
     public Transform camTransform;
@@ -39,13 +41,35 @@ public class CameraManager : MonoBehaviour
 
         cam2.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = 1;
 
-    }
+        NewRDZoom = true;
+        canZoomCorout = true;
 
+    }
+    public float RandomZoomCamera = 0;
+    public bool NewRDZoom;
+    public bool canZoomCorout;
     // Update is called once per frame
     void Update()
     {   
         if (Gino.instance.juicyManager.isCamera)
         CameraShake();
+
+        if (Input.GetKeyDown(KeyCode.E))
+            ZoomEffect();
+
+        //if(RandomZoomCamera < 0 && !NewRDZoom)
+        //{
+        //    ZoomEffect();
+        //}
+        //else
+        //{
+        //    if (NewRDZoom)
+        //    {
+        //        RandomZoomCamera = Random.Range(1, 3);
+        //        NewRDZoom = false;
+        //    }
+        //    RandomZoomCamera -= Time.deltaTime;
+        //}
 
         if (GameManager.instance.isStart)
         {
@@ -60,6 +84,15 @@ public class CameraManager : MonoBehaviour
                 break;
             case false:
                 UnZoomToCam2();
+                break;
+        }
+        switch (transitionZoom)
+        {
+            case true:
+                HitZoomCamera();
+                break;
+            case false:
+                UnZoomCamera();
                 break;
         }
     }
@@ -89,6 +122,56 @@ public class CameraManager : MonoBehaviour
         if (pathPos < 0) pathPos = 0;
         
         cam2.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = pathPos;
+    }
+    public void ZoomEffect()
+    {
+        //StartCoroutine(ZoomCoroutine());
+        HitZoomCamera();
+    }
+    IEnumerator ZoomCoroutine()
+    {
+        transitionZoom = true;
+        yield return new WaitForSeconds(2);
+        transitionZoom = false;
+    }
+
+    public void ZoomCamera()
+    {
+        if (cam2.m_Lens.FieldOfView > 3)
+        {
+            cam2.m_Lens.FieldOfView -= 10 * Time.deltaTime;
+        }
+        else cam2.m_Lens.FieldOfView = 3;
+        cam2.LookAt = player;
+        cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0.3f;
+        cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.3f;
+    }
+    public void HitZoomCamera()
+    {
+        if (cam2.m_Lens.FieldOfView > 15)
+        {
+            cam2.m_Lens.FieldOfView -= 10 * Time.deltaTime;
+        }
+        else UnZoomCamera();
+        cam2.LookAt = player;
+        cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0.5f;
+        cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.5f;
+    }
+    public void UnZoomCamera()
+    {
+        if (cam2.m_Lens.FieldOfView < 20)
+        {
+            cam2.m_Lens.FieldOfView += 10 * Time.deltaTime;
+        }
+        else
+        {
+            cam2.m_Lens.FieldOfView = 20;
+            //NewRDZoom = true;
+            //canZoomCorout = true;
+        }
+        cam2.LookAt = targetCam;
+        cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0.7f;
+        cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1f;
     }
 
     public void CameraShake() {

@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour
 
     public float bulletSpawnDist;
     public bool canMove;
+    bool alreadySpawn;
+    public Animator playerAnim;
+
     void Start()
     {
         NewBody(bodies.Length - 1);
@@ -56,12 +59,15 @@ public class PlayerController : MonoBehaviour
         bc = GetComponent<BoxCollider>();
         canMove = true;
     }
-    bool alreadySpawn;
     // Update is called once per frame
     void Update()
     {
         #region Input
         direction = Input.GetAxis("Horizontal");
+        if (direction >= -0.1f && direction <= 0.1f)
+            playerAnim.SetBool("Turn", false);
+        else
+            playerAnim.SetBool("Turn", true);
         if (Input.GetKeyDown("space"))
         {
             shoot = true;
@@ -105,6 +111,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
             Gino.instance.soundsManager.Play("Shoot Player");
+            playerAnim.SetTrigger("Shoot");
             Gino.instance.cameraManager.NewCameraShake(shootShakeValue.x, shootShakeValue.y);
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + bulletSpawnDist);
@@ -187,6 +194,8 @@ public class PlayerController : MonoBehaviour
         ChangeLifePoint(-1);
         Gino.instance.uiManager.LoseLife((int)state);
         Gino.instance.soundsManager.Play("Hit");
+        //Gino.instance.cameraManager.ZoomEffect();
+
         if (state != State.HIT3)
             NewState(true);
         else
