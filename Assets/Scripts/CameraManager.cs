@@ -47,6 +47,12 @@ public class CameraManager : MonoBehaviour
         if (Gino.instance.juicyManager.isCamera)
         CameraShake();
 
+        if (GameManager.instance.isStart)
+        {
+            player = FindObjectOfType<PlayerController>().transform;
+            cam2.Follow = player;
+        }
+
         switch (transitionDone)
         {
             case true:
