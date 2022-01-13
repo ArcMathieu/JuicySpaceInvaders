@@ -76,11 +76,14 @@ public class PlayerController : MonoBehaviour {
         } else {
             rb.velocity = new Vector3(characterHorizontalSpeed * direction, 0, 0);
         }
-        RotateDeltaTime();
+        if (Gino.instance.juicyManager.isMovement) {
+            RotateDeltaTime();
+        }
     }
 
     void Shoot() {
         if (shoot && shootTimer <= 0) {
+            Gino.instance.soundsManager.Play("Shoot Player");
             Gino.instance.cameraManager.NewCameraShake(shootShakeValue.x, shootShakeValue.y);
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + bulletSpawnDist);

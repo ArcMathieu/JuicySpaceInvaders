@@ -41,10 +41,10 @@ public class DecorsManager : MonoBehaviour
         road.AddComponent<RoadMovement>();
     }
 
-    private void Update() {
+    private void FixedUpdate() {
         for (int i = 0; i < timers.Length; i++) {
-            timers[i].x += Time.deltaTime;
-            if (timers[i].x >= timers[i].y) {
+            timers[i].x += Time.fixedDeltaTime;
+            if (timers[i].x >= timers[i].y * (100/ decorSpeed)) {
                 timers[i].x = 0;
                 Spawn(i);
             }

@@ -71,7 +71,9 @@ public class Enemy : MonoBehaviour {
             if (transform.position.z < Gino.instance.entitiesManager.player.transform.position.z + Gino.instance.entitiesManager.player.transform.localScale.z / 2) {
                 Gino.instance.uiManager.GameOver();
             }
-            Animation();
+            if (Gino.instance.juicyManager.isMovement) {
+                 Animation();
+            }
         }
     }
 
@@ -93,6 +95,7 @@ public class Enemy : MonoBehaviour {
             newRotation.eulerAngles = new Vector3 (-90, 0, 0);
             bullet.transform.rotation = newRotation;
         }
+        Gino.instance.soundsManager.Play("Shoot Police");
     }
 
     public void NewState(bool nextState, State newState = State.DESTROYED) {

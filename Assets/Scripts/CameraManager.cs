@@ -43,8 +43,10 @@ public class CameraManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if (Gino.instance.juicyManager.isCamera)
         CameraShake();
+
         switch (transitionDone)
         {
             case true:

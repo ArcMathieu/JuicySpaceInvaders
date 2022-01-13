@@ -7,9 +7,9 @@ public class LandScapeMovement : MonoBehaviour
     public int id;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Gino.instance.decorsManager.decorSpeed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Gino.instance.decorsManager.decorSpeed * Time.fixedDeltaTime);
     }
 
     public void GoToTrash() {
