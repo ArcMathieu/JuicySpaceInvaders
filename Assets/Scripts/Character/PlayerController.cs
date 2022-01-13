@@ -48,13 +48,14 @@ public class PlayerController : MonoBehaviour
     BoxCollider bc;
 
     public float bulletSpawnDist;
+    public bool canMove;
     void Start()
     {
         NewBody(bodies.Length - 1);
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
+        canMove = true;
     }
-    bool canMove;
     bool alreadySpawn;
     // Update is called once per frame
     void Update()
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
         Shoot();
-        if(lifePoint >= 0)
+        if(canMove)
             Movement();
     }
 
@@ -163,10 +164,6 @@ public class PlayerController : MonoBehaviour
     public void ChangeLifePoint(int changeLifePoint)
     {
         lifePoint += changeLifePoint;
-        if (lifePoint < 1)
-        {
-            Gino.instance.uiManager.GameOver();
-        }
     }
 
     public void NewState(bool nextState, State newState = State.HIT3)
@@ -191,7 +188,11 @@ public class PlayerController : MonoBehaviour
         Gino.instance.soundsManager.Play("Hit");
         if (state != State.HIT3)
             NewState(true);
-        else GameManager.instance.LaunchGameOver();
+        else
+        {
+            canMove = false;
+            GameManager.instance.LaunchGameOver();
+        }
     }
 
     void NewBody(int newBodyRange)

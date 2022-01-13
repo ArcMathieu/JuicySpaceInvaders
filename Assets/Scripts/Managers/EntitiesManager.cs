@@ -26,6 +26,7 @@ public class EntitiesManager : MonoBehaviour {
     public List<Enemy> enemies = new List<Enemy>();
     void Start() {
         NewWave(enemiesX,enemiesY);
+        canShoot = false;
     }
 
     // Update is called once per frame
@@ -68,19 +69,18 @@ public class EntitiesManager : MonoBehaviour {
             newDirection = false;
         }
     }
-    bool isGameStart;
     bool alreadyStarted;
-
+    public bool canShoot;
     IEnumerator moveFastForward()
     {
         alreadyStarted = true;
         distJump = 20;
         yield return new WaitForSeconds(4);
         distJump = 2.3f;
-        isGameStart = true;
+        canShoot = true;
     }
     void ShootTimer() {
-        if (isGameStart)
+        if (canShoot)
         {
             if (timeBetweenShootTimer < 0)
             {

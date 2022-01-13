@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         {
             Gino.instance.decorsManager.decorSpeed = Mathf.Lerp(Gino.instance.decorsManager.decorSpeed, 0, 1);
             Gino.instance.entitiesManager.distJump = 0;
+            Gino.instance.entitiesManager.canShoot = false;
             PlayerPrefs.canMove = false;
         }
         else
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
         Gino.instance.decorsManager.decorSpeed = Mathf.Lerp(0, Gino.instance.decorsManager.decorMaxSpeed, 1);
         Gino.instance.entitiesManager.distJump = 2.3f;
         PlayerPrefs.canMove = true;
+        Gino.instance.entitiesManager.canShoot = true;
     }
     public void LaunchGameOver()
     {

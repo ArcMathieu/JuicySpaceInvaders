@@ -12,12 +12,6 @@ public class Bullet : MonoBehaviour
         rb.velocity = new Vector3(0, 0, speed);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.GetComponent<Enemy>()) {
             other.gameObject.GetComponent<Enemy>().Hit();
