@@ -9955,6 +9955,7 @@ MonoBehaviour:
   body: {fileID: 0}
   bulletSpawnDist: 1
   canMove: 0
+  playerAnim: {fileID: 745835664313506390}
 --- !u!95 &745835664313506390
 Animator:
   serializedVersion: 3
@@ -9987,7 +9988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 677741199545837647, guid: 17ebf0bd78928b64080466b6a2b37be6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 677741199545837647, guid: 17ebf0bd78928b64080466b6a2b37be6, type: 3}
       propertyPath: m_LocalPosition.y

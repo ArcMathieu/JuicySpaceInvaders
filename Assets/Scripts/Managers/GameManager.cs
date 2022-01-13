@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Transform frontBorder;
     public Transform backBorder;
     public Transform gameOver;
-    public Transform Score;
+    public ScoreManager ScoreManager;
     public CameraManager camManager;
     public GameObject BarrageAnim;
     public PlayerController PlayerPrefs;
@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
     {
         //if (Input.GetKeyDown(KeyCode.Space))
         //    LaunchGame();
+    }
+
+    public void AddScoreToUI(int amount)
+    {
+        ScoreManager.AddScore(amount);
     }
 
     public void LaunchGame()
@@ -78,7 +83,7 @@ public class GameManager : MonoBehaviour
         Gino.instance.decorsManager.decorSpeed = Mathf.Lerp(Gino.instance.decorsManager.decorSpeed, 0, 1);
         Gino.instance.entitiesManager.distJump = 0;
         gameOver.GetComponent<Animator>().SetBool("GO", true);
-        Score.GetComponent<Animator>().SetTrigger("GameOver");
+        ScoreManager.transform.parent.GetComponent<Animator>().Play("GameOverScore");
     }
     public void RestartGame()
     {

@@ -127,8 +127,9 @@ public class Enemy : MonoBehaviour {
         Instantiate(explosion, transform.position + Vector3.up * 2, Quaternion.identity);
         Gino.instance.cameraManager.NewCameraShake(1, 2);
         Gino.instance.entitiesManager.enemies.Remove(this);
-       // GameObject particle = body.transform.GetChild(0).gameObject;
-       // particle.transform.parent = null;
+        // GameObject particle = body.transform.GetChild(0).gameObject;
+        // particle.transform.parent = null;
+        GameManager.instance.AddScoreToUI(100);
         rb.velocity = Vector3.zero;
         Vector3 force = new Vector3(0, 1, 0.5f);
         force = force * 700;

@@ -112,7 +112,7 @@ public class CameraManager : MonoBehaviour
         for (int i = 0; i < toRemove.Count; i++) {
             shakes.Remove(toRemove[i]);
         }
-        camTransform.localPosition = originalPos + Random.insideUnitSphere * mainAmount;
+        camTransform.localPosition = originalPos + Random.insideUnitSphere * mainAmount * Gino.instance.soundsManager.ShakeMultiplier;
     }
 
     public void NewCameraShake(float newDuration, float newAmount) {

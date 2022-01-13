@@ -25,18 +25,32 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = "Score: " + currentScore;
     }
-
+    float ComboTime;
+    int trueCombo;
+    bool inCombo;
     // Update is called once per frame
     void Update()
     {
         HandleScore();
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //    AddScore(100);
+        ComboTime -= Time.deltaTime;
+        if (ComboTime > 0) inCombo = true;
+        else
+        {
+            trueCombo = 0;
+            inCombo = false;
+        }
+
     }
 
-    private void AddScore(int amount)
+    public void AddScore(int amount)
     {
         ScoreT.AddScoreAnim();
-        currentScore += amount;
+        if(inCombo)
+            currentScore += amount * 2 + 50*trueCombo;
+        else
+            currentScore += amount;
+
+        trueCombo++;
+        ComboTime = 2;
     }
 }

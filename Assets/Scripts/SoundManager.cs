@@ -1,12 +1,17 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
     public Sound[] sounds = new Sound[0];
     public Sound[] music = new Sound[0];
     public Sound currentMusic;
+
+    [SerializeField] Slider VolumeMusicSlider;
+    [SerializeField] Slider VolumeSFXSlider;
+    [SerializeField] Slider ValueShakeSlider;
 
     private static SoundManager instance;
     public static SoundManager i
@@ -60,5 +65,25 @@ public class SoundManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+
+    public void ChangeVolumeMusic()
+    {
+        foreach (Sound m in music)
+        {
+            m.source.volume = VolumeMusicSlider.value;
+        }
+    }
+    public void ChangeVolumeSFX()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = VolumeSFXSlider.value;
+        }
+    }
+    public float ShakeMultiplier;
+    public void ChangeValueShake()
+    {
+        ShakeMultiplier = ValueShakeSlider.value;
     }
 }
