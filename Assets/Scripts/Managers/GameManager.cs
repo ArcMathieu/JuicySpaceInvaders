@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
         StartCoroutine(waitToSpawnPlayer());
+        Gino.instance.uiManager.gameObject.GetComponent<BreakingNews>().enabled = true;
     }
 
     IEnumerator waitToSpawnPlayer()

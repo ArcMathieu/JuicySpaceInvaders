@@ -13,6 +13,12 @@ public class ParticleJuicy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Gino.instance.juicyManager.isParticle == false) {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void OnDestroy() {
+        Gino.instance.juicyManager.particles.Remove(this);
     }
 }

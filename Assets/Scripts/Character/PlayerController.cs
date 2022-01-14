@@ -109,14 +109,18 @@ public class PlayerController : MonoBehaviour
     {
         if (shoot && shootTimer <= 0)
         {
-            transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
+            if (Gino.instance.juicyManager.isAnimation) {
+                transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
+                playerAnim.SetTrigger("Shoot");
+            }
             Gino.instance.soundsManager.Play("Shoot Player");
-            playerAnim.SetTrigger("Shoot");
             Gino.instance.cameraManager.NewCameraShake(shootShakeValue.x, shootShakeValue.y);
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + bulletSpawnDist);
             shootTimer = shootTime;
-            StartCoroutine(Propulsion(propulsionFrame, propulsionDist));
+            if (Gino.instance.juicyManager.isMovement) {
+                StartCoroutine(Propulsion(propulsionFrame, propulsionDist));
+            }
         }
         else
         {

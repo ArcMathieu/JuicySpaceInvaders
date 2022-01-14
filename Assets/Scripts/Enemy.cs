@@ -83,7 +83,9 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Shoot() {
-        transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
+        if (Gino.instance.juicyManager.isAnimation) {
+            transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
+        }
         RaycastHit hit;
         Vector3 positionShoot = new Vector3(transform.position.x, transform.position.y, transform.position.z -bc.size.z);
         if (Physics.Raycast(positionShoot, Vector3.forward * -1, out hit, Mathf.Infinity)) {

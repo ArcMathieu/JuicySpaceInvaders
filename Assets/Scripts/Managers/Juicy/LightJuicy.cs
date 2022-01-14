@@ -13,6 +13,12 @@ public class LightJuicy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Gino.instance.juicyManager.isLight == false) {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void OnDestroy() {
+        Gino.instance.juicyManager.lights.Remove(this);
     }
 }
