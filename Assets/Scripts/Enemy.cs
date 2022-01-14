@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour {
                 Gino.instance.entitiesManager.newDirection = true;
             }
             if (transform.position.z < Gino.instance.entitiesManager.player.transform.position.z + Gino.instance.entitiesManager.player.transform.localScale.z / 2) {
-                Gino.instance.uiManager.GameOver();
+                //Gino.instance.uiManager.GameOver();
             }
             if (Gino.instance.juicyManager.isMovement) {
                  Animation();

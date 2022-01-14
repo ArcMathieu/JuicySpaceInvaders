@@ -26,7 +26,7 @@ public class SoundManager : MonoBehaviour
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
-            s.source.volume = s.volume;
+            s.source.volume = VolumeSFXSlider.value;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
@@ -35,7 +35,7 @@ public class SoundManager : MonoBehaviour
             m.source = gameObject.AddComponent<AudioSource>();
             m.source.clip = m.clip;
 
-            m.source.volume = m.volume;
+            m.source.volume = VolumeMusicSlider.value;
             m.source.pitch = m.pitch;
             m.source.loop = m.loop;
         }

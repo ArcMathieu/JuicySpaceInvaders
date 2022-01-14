@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     public bool canMove;
     bool alreadySpawn;
     public Animator playerAnim;
+    public Animator BangAnim;
     bool canBeHit;
 
     void Start()
@@ -111,9 +112,11 @@ public class PlayerController : MonoBehaviour
     {
         if (shoot && shootTimer <= 0)
         {
+            BangAnim.SetTrigger("Bang");
             if (Gino.instance.juicyManager.isAnimation) {
                 transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                 playerAnim.SetTrigger("Shoot");
+                
             }
             Gino.instance.soundsManager.Play("Shoot Player");
             Gino.instance.cameraManager.NewCameraShake(shootShakeValue.x, shootShakeValue.y);
