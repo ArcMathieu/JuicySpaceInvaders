@@ -111,21 +111,21 @@ public class JuicyManager : MonoBehaviour
         }
     }
     public void AllSwitch() {
-        isAll = !isAll;
-        toggles[7].SetActive(isAll);
-        isCamera = !isAll;
-        isAnimation = !isAll;
-        isLight = !isAll;
-        isMovement = !isAll;
-        isUI = !isAll;
-        isSound = !isAll;
-        isParticle = !isAll;
-        ParticleSwitch();
-        SoundSwitch();
-        UiSwitch();
-        MovementSwitch();
-        LightSwitch();
-        AnimationSwitch();
-        CameraSwitch();
+        //isAll = !isAll;
+        //toggles[7].SetActive(isAll);
+        //isCamera = !isAll;
+        //isAnimation = !isAll;
+        //isLight = !isAll;
+        //isMovement = !isAll;
+        //isUI = !isAll;
+        //isSound = !isAll;
+        //isParticle = !isAll;
+        //ParticleSwitch();
+        //SoundSwitch();
+        //UiSwitch();
+        //MovementSwitch();
+        //LightSwitch();
+        //AnimationSwitch();
+        //CameraSwitch();
     }
 }
