@@ -40,7 +40,7 @@ public class BreakingNews : MonoBehaviour {
     }
 
     void UpdateWhite() {
-        titleText = "There is " + Gino.instance.entitiesManager.enemies.Count + " cars behind the killer";
+        titleText = "There is " + Gino.instance.uiManager.totalKilled + " cars behind the killer";
         titleRef.text = titleText;
     }
 }
