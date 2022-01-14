@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     public bool canMove;
     bool alreadySpawn;
     public Animator playerAnim;
+    bool canBeHit;
 
     void Start()
     {
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         canMove = true;
+        canBeHit = true;
     }
     // Update is called once per frame
     void Update()
@@ -184,6 +186,7 @@ public class PlayerController : MonoBehaviour
         {
             Gino.instance.cameraManager.NewCameraShake(hitShakeValue.x, hitShakeValue.y);
             state--;
+            Gino.instance.uiManager.LoseLife((int)state);
         }
         else
         {
@@ -195,20 +198,29 @@ public class PlayerController : MonoBehaviour
 
     public void Hit()
     {
-        ChangeLifePoint(-1);
-        Gino.instance.uiManager.LoseLife((int)state);
-        Gino.instance.soundsManager.Play("Hit");
-        //Gino.instance.cameraManager.ZoomEffect();
-
-        if (state != State.HIT3)
-            NewState(true);
-        else
+        if (canBeHit)
         {
             canMove = false;
-            GameManager.instance.LaunchGameOver();
+            StartCoroutine(hitted());
+            ChangeLifePoint(-1);
+            Gino.instance.soundsManager.Play("Hit");
+            //Gino.instance.cameraManager.ZoomEffect();
+
+            if (state != State.HIT3)
+                NewState(true);
+            else
+            {
+                canMove = false;
+                GameManager.instance.LaunchGameOver();
+            }
         }
     }
-
+    IEnumerator hitted()
+    {
+        canBeHit = false;
+        yield return new WaitForSeconds(1);
+        canBeHit = true;
+    }
     void NewBody(int newBodyRange)
     {
         GameObject newBody = Instantiate(bodies[newBodyRange]);

@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour {
         NewBody(bodies.Length - 1);
         NewAnimation(randomXValue, randomZValue, minAnimationFrame, maxAnimationFrame);
 }
-
+    bool alreadyAdvance;
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -64,7 +64,11 @@ public class Enemy : MonoBehaviour {
                 direction = Gino.instance.entitiesManager.enemyDirection;
                 NextLine();
             }
-
+            if (!alreadyAdvance && GameManager.instance.PoliceMoveForward)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 80);
+                alreadyAdvance = true;
+            }
             if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x +bc.size.x / 2 && Gino.instance.entitiesManager.enemyDirection == -1 ||
                  (Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x +bc.size.x / 2) && Gino.instance.entitiesManager.enemyDirection == 1) {
                 Gino.instance.entitiesManager.newDirection = true;

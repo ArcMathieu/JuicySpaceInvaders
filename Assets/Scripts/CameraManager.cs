@@ -41,13 +41,8 @@ public class CameraManager : MonoBehaviour
 
         cam2.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = 1;
 
-        NewRDZoom = true;
-        canZoomCorout = true;
-
     }
-    public float RandomZoomCamera = 0;
-    public bool NewRDZoom;
-    public bool canZoomCorout;
+    
     // Update is called once per frame
     void Update()
     {   
@@ -56,20 +51,6 @@ public class CameraManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
             ZoomEffect();
-
-        //if(RandomZoomCamera < 0 && !NewRDZoom)
-        //{
-        //    ZoomEffect();
-        //}
-        //else
-        //{
-        //    if (NewRDZoom)
-        //    {
-        //        RandomZoomCamera = Random.Range(1, 3);
-        //        NewRDZoom = false;
-        //    }
-        //    RandomZoomCamera -= Time.deltaTime;
-        //}
 
         if (GameManager.instance.isStart)
         {
@@ -86,10 +67,11 @@ public class CameraManager : MonoBehaviour
                 UnZoomToCam2();
                 break;
         }
+
         switch (transitionZoom)
         {
             case true:
-                HitZoomCamera();
+                ZoomCamera();
                 break;
             case false:
                 UnZoomCamera();
@@ -125,8 +107,7 @@ public class CameraManager : MonoBehaviour
     }
     public void ZoomEffect()
     {
-        //StartCoroutine(ZoomCoroutine());
-        HitZoomCamera();
+        StartCoroutine(ZoomCoroutine());
     }
     IEnumerator ZoomCoroutine()
     {
@@ -146,29 +127,15 @@ public class CameraManager : MonoBehaviour
         cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0.3f;
         cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.3f;
     }
-    public void HitZoomCamera()
-    {
-        if (cam2.m_Lens.FieldOfView > 15)
-        {
-            cam2.m_Lens.FieldOfView -= 10 * Time.deltaTime;
-        }
-        else UnZoomCamera();
-        cam2.LookAt = player;
-        cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0.5f;
-        cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.5f;
-    }
+
     public void UnZoomCamera()
     {
         if (cam2.m_Lens.FieldOfView < 20)
         {
             cam2.m_Lens.FieldOfView += 10 * Time.deltaTime;
         }
-        else
-        {
-            cam2.m_Lens.FieldOfView = 20;
-            //NewRDZoom = true;
-            //canZoomCorout = true;
-        }
+        else cam2.m_Lens.FieldOfView = 20;
+
         cam2.LookAt = targetCam;
         cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0.7f;
         cam2.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1f;

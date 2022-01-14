@@ -36,12 +36,13 @@ public class GameManager : MonoBehaviour
     {
         ScoreManager.AddScore(amount);
     }
-
+    public bool PoliceMoveForward;
     public void LaunchGame()
     {
         camManager.cam1.gameObject.GetComponent<Animator>().SetTrigger("Start");
         BarrageAnim.GetComponent<Animator>().SetTrigger("Start");
         isPaused = false;
+        PoliceMoveForward = true;
         Time.timeScale = 1;
         StartCoroutine(waitToSpawnPlayer());
         Gino.instance.uiManager.gameObject.GetComponent<BreakingNews>().enabled = true;

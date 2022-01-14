@@ -33,7 +33,7 @@ public class EntitiesManager : MonoBehaviour {
     void LateUpdate() {
         NewDirection();
         ShootTimer();
-        if (GameManager.instance.isStart && !alreadyStarted) StartCoroutine(moveFastForward());
+        //if (GameManager.instance.isStart && !alreadyStarted) StartCoroutine(moveFastForward());
     }
 
     void NewWave(int enemyEachLine, int lines) {
@@ -74,7 +74,7 @@ public class EntitiesManager : MonoBehaviour {
     IEnumerator moveFastForward()
     {
         alreadyStarted = true;
-        distJump = 20;
+        distJump = 40;
         yield return new WaitForSeconds(4);
         distJump = 2.3f;
         canShoot = true;
