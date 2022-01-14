@@ -40,7 +40,7 @@ public class BreakingNews : MonoBehaviour {
     }
 
     void UpdateWhite() {
-        titleText = "There is " + Gino.instance.uiManager.totalKilled + " cars behind the killer";
+        titleText = Gino.instance.uiManager.totalKilled + " police officers shot and wounded";
         titleRef.text = titleText;
     }
 }
