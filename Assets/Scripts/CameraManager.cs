@@ -42,15 +42,15 @@ public class CameraManager : MonoBehaviour
         cam2.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = 1;
 
     }
-    
+    public bool cantMove;
     // Update is called once per frame
     void Update()
     {   
         if (Gino.instance.juicyManager.isCamera)
         CameraShake();
 
-        if (Input.GetKeyDown(KeyCode.E))
-            ZoomEffect();
+        //if (Input.GetKeyDown(KeyCode.E))
+        //    ZoomEffect();
 
         if (GameManager.instance.isStart)
         {
@@ -61,7 +61,10 @@ public class CameraManager : MonoBehaviour
         switch (transitionDone)
         {
             case true:
-                Cam2Movement();
+                if (!cantMove)
+                    Cam2Movement();
+                else
+                    blockedcam();
                 break;
             case false:
                 UnZoomToCam2();
@@ -104,6 +107,10 @@ public class CameraManager : MonoBehaviour
         if (pathPos < 0) pathPos = 0;
         
         cam2.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = pathPos;
+    }
+    public void blockedcam()
+    {
+        cam2.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = 1;
     }
     public void ZoomEffect()
     {

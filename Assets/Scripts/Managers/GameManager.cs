@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public GameObject BarrageAnim;
     public PlayerController PlayerPrefs;
     public bool isStart;
+    public Animator bkack;
+    public Animator Uiback;
     void Awake()
     {
         instance = this;
@@ -24,6 +26,8 @@ public class GameManager : MonoBehaviour
     {
         camManager = Gino.instance.cameraManager;
         isPaused = false;
+        bkack.Play("BlackFade");
+        Uiback.Play("UIEmptyAnim");
     }
     // Update is called once per frame
     void Update()
@@ -53,6 +57,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(4.4f);
         PlayerPrefs = Instantiate(PlayerPrefs, Vector3.zero, new Quaternion(0,180,0,0), BarrageAnim.transform);
         isStart = true;
+        Gino.instance.entitiesManager.canShoot = true;
     }
     bool isPaused;
     public void PauseGame()

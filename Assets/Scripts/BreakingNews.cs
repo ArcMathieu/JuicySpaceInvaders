@@ -17,7 +17,7 @@ public class BreakingNews : MonoBehaviour {
 
     }
     private void Start() {
-
+        NewTitle();
     }
     private void Update() {
         if (changeNewsTimer.x >= changeNewsTimer.y) {

@@ -67,10 +67,14 @@ public class PlayerController : MonoBehaviour
     {
         #region Input
         direction = Input.GetAxis("Horizontal");
-        if (direction >= -0.1f && direction <= 0.1f)
-            playerAnim.SetBool("Turn", false);
-        else
-            playerAnim.SetBool("Turn", true);
+        if (Gino.instance.juicyManager.isAnimation)
+        {
+            if (direction >= -0.1f && direction <= 0.1f)
+                playerAnim.SetBool("Turn", false);
+            else
+                playerAnim.SetBool("Turn", true);
+        }
+
         if (Input.GetKeyDown("space"))
         {
             shoot = true;
@@ -81,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
         Shoot();
-        if(canMove)
+        if (canMove)
             Movement();
     }
 
@@ -112,18 +116,22 @@ public class PlayerController : MonoBehaviour
     {
         if (shoot && shootTimer <= 0)
         {
-            BangAnim.SetTrigger("Bang");
-            if (Gino.instance.juicyManager.isAnimation) {
-                transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
+            if (Gino.instance.juicyManager.isUI)
+                BangAnim.SetTrigger("Bang");
+
+            if (Gino.instance.juicyManager.isAnimation)
+            {
+                //transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                 playerAnim.SetTrigger("Shoot");
-                
+
             }
             Gino.instance.soundsManager.Play("Shoot Player");
             Gino.instance.cameraManager.NewCameraShake(shootShakeValue.x, shootShakeValue.y);
             Bullet newBullet = Instantiate(Gino.instance.entitiesManager.bullet);
             newBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + bulletSpawnDist);
             shootTimer = shootTime;
-            if (Gino.instance.juicyManager.isMovement) {
+            if (Gino.instance.juicyManager.isMovement)
+            {
                 StartCoroutine(Propulsion(propulsionFrame, propulsionDist));
             }
         }
@@ -181,6 +189,10 @@ public class PlayerController : MonoBehaviour
     public void ChangeLifePoint(int changeLifePoint)
     {
         lifePoint += changeLifePoint;
+        if(lifePoint < 1) 
+        {
+            GameOvered();
+        }
     }
 
     public void NewState(bool nextState, State newState = State.HIT3)
@@ -203,7 +215,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canBeHit)
         {
-            canMove = false;
+            canMove = true;
             StartCoroutine(hitted());
             ChangeLifePoint(-1);
             Gino.instance.soundsManager.Play("Hit");
@@ -211,12 +223,13 @@ public class PlayerController : MonoBehaviour
 
             if (state != State.HIT3)
                 NewState(true);
-            else
-            {
-                canMove = false;
-                GameManager.instance.LaunchGameOver();
-            }
         }
+    }
+
+    public void GameOvered()
+    {
+        canMove = false;
+        GameManager.instance.LaunchGameOver();
     }
     IEnumerator hitted()
     {

@@ -65,7 +65,7 @@ public class SoundManager : MonoBehaviour
         }
         s.source.Play();
     }
-
+   
     public void ChangeVolumeMusic()
     {
         foreach (Sound m in music)
@@ -84,5 +84,28 @@ public class SoundManager : MonoBehaviour
     public void ChangeValueShake()
     {
         ShakeMultiplier = ValueShakeSlider.value;
+    }
+
+    public void StopSound()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = 0;
+        }
+        foreach (Sound m in music)
+        {
+            m.source.volume = 0;
+        }
+    } 
+    public void StartSound()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = VolumeSFXSlider.value;
+        }
+        foreach (Sound m in music)
+        {
+            m.source.volume = VolumeMusicSlider.value;
+        }
     }
 }

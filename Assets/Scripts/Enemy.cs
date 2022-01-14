@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour {
             }
             if (!alreadyAdvance && GameManager.instance.PoliceMoveForward)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 80);
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 140);
                 alreadyAdvance = true;
             }
             if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x +bc.size.x / 2 && Gino.instance.entitiesManager.enemyDirection == -1 ||
@@ -85,11 +85,10 @@ public class Enemy : MonoBehaviour {
     void NextLine() {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - Gino.instance.entitiesManager.distJump);
     }
-
+    public Animator BangAnim;
     public void Shoot() {
-        if (Gino.instance.juicyManager.isAnimation) {
-            transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
-        }
+        
+        
         RaycastHit hit;
         Vector3 positionShoot = new Vector3(transform.position.x, transform.position.y, transform.position.z -bc.size.z);
         if (Physics.Raycast(positionShoot, Vector3.forward * -1, out hit, Mathf.Infinity)) {
@@ -98,12 +97,20 @@ public class Enemy : MonoBehaviour {
             }
         } else {
             EnemyBullet bullet = Instantiate(Gino.instance.entitiesManager.enemybullet);
+
+            if (Gino.instance.juicyManager.isAnimation)
+            {
+                transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Shoot");
+            }
+            //if (Gino.instance.juicyManager.isUI)
+            //    BangAnim.SetTrigger("BangEnemy");
+
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - bulletSpawnDist);
             Quaternion newRotation = Quaternion.identity;
             newRotation.eulerAngles = new Vector3 (-90, 0, 0);
             bullet.transform.rotation = newRotation;
         }
-        Gino.instance.soundsManager.Play("Shoot Police");
+        //Gino.instance.soundsManager.Play("Shoot Police");
     }
 
     public void NewState(bool nextState, State newState = State.DESTROYED) {
@@ -135,6 +142,7 @@ public class Enemy : MonoBehaviour {
         Gino.instance.entitiesManager.enemies.Remove(this);
         // GameObject particle = body.transform.GetChild(0).gameObject;
         // particle.transform.parent = null;
+        Gino.instance.uiManager.totalKilled++;
         GameManager.instance.AddScoreToUI(100);
         rb.velocity = Vector3.zero;
         Vector3 force = new Vector3(0, 1, 0.5f);

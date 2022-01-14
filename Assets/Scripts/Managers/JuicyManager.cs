@@ -80,14 +80,15 @@ public class JuicyManager : MonoBehaviour
         isLight = !isLight;
         toggles[2].SetActive(isLight);
         if (isLight) {
-            for (int i = 0; i < particles.Count; i++) {
+            for (int i = 0; i < lights.Count; i++) {
                 lights[i].gameObject.SetActive(true);
             }
         } else {
-            for (int i = 0; i < particles.Count; i++) {
+            for (int i = 0; i < lights.Count; i++) {
                 lights[i].gameObject.SetActive(false);
             }
         }
+        
     }
     public void AnimationSwitch() {
         isAnimation = !isAnimation;
@@ -96,6 +97,14 @@ public class JuicyManager : MonoBehaviour
     public void CameraSwitch() {
         isCamera = !isCamera;
         toggles[4].SetActive(isCamera);
+        if (isCamera)
+        {
+            Gino.instance.cameraManager.cantMove = false;
+        }
+        else
+        {
+            Gino.instance.cameraManager.cantMove = true;
+        }
     }
     public void MovementSwitch() {
         isMovement = !isMovement;
@@ -105,27 +114,27 @@ public class JuicyManager : MonoBehaviour
         isSound = !isSound;
         toggles[6].SetActive(isSound);
         if (isSound) {
-            Gino.instance.soundsManager.gameObject.SetActive(true);
+            Gino.instance.soundsManager.StartSound();
         } else {
-            Gino.instance.soundsManager.gameObject.SetActive(false);
+            Gino.instance.soundsManager.StopSound();
         }
     }
     public void AllSwitch() {
-        //isAll = !isAll;
-        //toggles[7].SetActive(isAll);
-        //isCamera = !isAll;
-        //isAnimation = !isAll;
-        //isLight = !isAll;
-        //isMovement = !isAll;
-        //isUI = !isAll;
-        //isSound = !isAll;
-        //isParticle = !isAll;
-        //ParticleSwitch();
-        //SoundSwitch();
-        //UiSwitch();
-        //MovementSwitch();
-        //LightSwitch();
-        //AnimationSwitch();
-        //CameraSwitch();
+        isAll = !isAll;
+        toggles[7].SetActive(isAll);
+        isCamera = !isAll;
+        isAnimation = !isAll;
+        isLight = !isAll;
+        isMovement = !isAll;
+        isUI = !isAll;
+        isSound = !isAll;
+        isParticle = !isAll;
+        ParticleSwitch();
+        SoundSwitch();
+        UiSwitch();
+        MovementSwitch();
+        LightSwitch();
+        AnimationSwitch();
+        CameraSwitch();
     }
 }
