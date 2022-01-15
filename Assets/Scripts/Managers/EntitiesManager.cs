@@ -29,11 +29,18 @@ public class EntitiesManager : MonoBehaviour {
         canShoot = false;
     }
 
+    bool alreadyDist;
+    public bool canShoot;
+
     // Update is called once per frame
     void LateUpdate() {
+        if (GameManager.instance.PoliceMoveForward && !alreadyDist)
+        {
+            distJump = 2.3f;
+            //canShoot = true;
+        }
         NewDirection();
         ShootTimer();
-        //if (GameManager.instance.isStart && !alreadyStarted) StartCoroutine(moveFastForward());
     }
 
     void NewWave(int enemyEachLine, int lines) {
@@ -69,17 +76,9 @@ public class EntitiesManager : MonoBehaviour {
             newDirection = false;
         }
     }
-    bool alreadyStarted;
-    public bool canShoot;
-    IEnumerator moveFastForward()
-    {
-        alreadyStarted = true;
-        distJump = 40;
-        yield return new WaitForSeconds(4);
-        distJump = 2.3f;
-        canShoot = true;
-    }
+
     void ShootTimer() {
+        
         if (canShoot)
         {
             if (timeBetweenShootTimer < 0)

@@ -76,7 +76,7 @@ MonoBehaviour:
   body: {fileID: 0}
   hit: 0
   bulletSpawnDist: 0.8
-  explosion: {fileID: 5145826295432097769, guid: fa30a5cdaa938b14cb81e1bd10464e1e, type: 3}
+  explosion: {fileID: 1890970146602926956, guid: c094449bd11b012489934f51d62f7045, type: 3}
   BangAnim: {fileID: 5325560420381492686}
 --- !u!54 &6274045132404952930
 Rigidbody:

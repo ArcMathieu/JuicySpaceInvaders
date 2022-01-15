@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
         camManager.cam1.gameObject.GetComponent<Animator>().SetTrigger("Start");
         BarrageAnim.GetComponent<Animator>().SetTrigger("Start");
         isPaused = false;
-        PoliceMoveForward = true;
         Time.timeScale = 1;
         StartCoroutine(waitToSpawnPlayer());
         Gino.instance.uiManager.gameObject.GetComponent<BreakingNews>().enabled = true;
@@ -57,6 +56,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(4.4f);
         PlayerPrefs = Instantiate(PlayerPrefs, Vector3.zero, new Quaternion(0,180,0,0), BarrageAnim.transform);
         isStart = true;
+        PoliceMoveForward = true;
         Gino.instance.entitiesManager.canShoot = true;
     }
     bool isPaused;

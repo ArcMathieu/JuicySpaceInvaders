@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
-    public enum State {
+public class Enemy : MonoBehaviour
+{
+    public enum State
+    {
         NORMAL = 2,
         BURNING = 1,
         DESTROYED = 0
@@ -37,7 +39,7 @@ public class Enemy : MonoBehaviour {
     BoxCollider bc;
     Rigidbody rb;
 
-    public bool hit = false; 
+    public bool hit = false;
 
     public float bulletSpawnDist;
     public GameObject explosion;
@@ -53,14 +55,16 @@ public class Enemy : MonoBehaviour {
         rb.velocity = new Vector3(speed * direction, 0, 0);
         NewBody(bodies.Length - 1);
         NewAnimation(randomXValue, randomZValue, minAnimationFrame, maxAnimationFrame);
-}
+    }
     bool alreadyAdvance;
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!die) {
+        if (!die)
+        {
             rb.velocity = new Vector3(speed * direction, 0, 0);
-            if (direction != Gino.instance.entitiesManager.enemyDirection) {
+            if (direction != Gino.instance.entitiesManager.enemyDirection)
+            {
                 direction = Gino.instance.entitiesManager.enemyDirection;
                 NextLine();
             }
@@ -69,33 +73,42 @@ public class Enemy : MonoBehaviour {
                 transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 140);
                 alreadyAdvance = true;
             }
-            if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x +bc.size.x / 2 && Gino.instance.entitiesManager.enemyDirection == -1 ||
-                 (Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x +bc.size.x / 2) && Gino.instance.entitiesManager.enemyDirection == 1) {
+            if (Gino.instance.gameManager.leftBorder.transform.position.x >= transform.position.x + bc.size.x / 2 && Gino.instance.entitiesManager.enemyDirection == -1 ||
+                 (Gino.instance.gameManager.rightBorder.transform.position.x <= transform.position.x + bc.size.x / 2) && Gino.instance.entitiesManager.enemyDirection == 1)
+            {
                 Gino.instance.entitiesManager.newDirection = true;
             }
-            if (transform.position.z < Gino.instance.entitiesManager.player.transform.position.z + Gino.instance.entitiesManager.player.transform.localScale.z / 2) {
+            if (transform.position.z < Gino.instance.entitiesManager.player.transform.position.z + Gino.instance.entitiesManager.player.transform.localScale.z / 2)
+            {
                 //Gino.instance.uiManager.GameOver();
             }
-            if (Gino.instance.juicyManager.isMovement) {
-                 Animation();
+            if (Gino.instance.juicyManager.isMovement)
+            {
+                Animation();
             }
         }
     }
 
-    void NextLine() {
+    void NextLine()
+    {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - Gino.instance.entitiesManager.distJump);
     }
     public Animator BangAnim;
-    public void Shoot() {
-        
-        
+    public void Shoot()
+    {
+
+
         RaycastHit hit;
-        Vector3 positionShoot = new Vector3(transform.position.x, transform.position.y, transform.position.z -bc.size.z);
-        if (Physics.Raycast(positionShoot, Vector3.forward * -1, out hit, Mathf.Infinity)) {
-            if (hit.transform.GetComponent<Enemy>()) {
+        Vector3 positionShoot = new Vector3(transform.position.x, transform.position.y, transform.position.z - bc.size.z);
+        if (Physics.Raycast(positionShoot, Vector3.forward * -1, out hit, Mathf.Infinity))
+        {
+            if (hit.transform.GetComponent<Enemy>())
+            {
                 hit.transform.GetComponent<Enemy>().Shoot();
             }
-        } else {
+        }
+        else
+        {
             EnemyBullet bullet = Instantiate(Gino.instance.entitiesManager.enemybullet);
 
             if (Gino.instance.juicyManager.isAnimation)
@@ -107,34 +120,42 @@ public class Enemy : MonoBehaviour {
 
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - bulletSpawnDist);
             Quaternion newRotation = Quaternion.identity;
-            newRotation.eulerAngles = new Vector3 (-90, 0, 0);
+            newRotation.eulerAngles = new Vector3(-90, 0, 0);
             bullet.transform.rotation = newRotation;
         }
         //Gino.instance.soundsManager.Play("Shoot Police");
     }
 
-    public void NewState(bool nextState, State newState = State.DESTROYED) {
-        if (nextState && state != State.DESTROYED) {
+    public void NewState(bool nextState, State newState = State.DESTROYED)
+    {
+        if (nextState && state != State.DESTROYED)
+        {
             state--;
-        } else {
+        }
+        else
+        {
             state = newState;
         }
 
-        if (state == State.DESTROYED) {
+        if (state == State.DESTROYED)
+        {
             StartCoroutine(Die());
         }
 
         NewBody((int)state);
     }
 
-    public void Hit() {
+    public void Hit()
+    {
         Gino.instance.cameraManager.NewCameraShake(Gino.instance.entitiesManager.enemyHitCameraShake.x, Gino.instance.entitiesManager.enemyHitCameraShake.y);
-        if (!die) {
-            NewState(true); 
+        if (!die)
+        {
+            NewState(true);
         }
     }
 
-    IEnumerator Die() {
+    IEnumerator Die()
+    {
         die = true;
         Gino.instance.soundsManager.Play("Explosion");
         Instantiate(explosion, transform.position + Vector3.up * 2, Quaternion.identity);
@@ -152,8 +173,9 @@ public class Enemy : MonoBehaviour {
         bc.isTrigger = true;
         hit = false;
         yield return new WaitForSeconds(1f);
-    //    Destroy(particle);
-        while (hit != true) {
+        //    Destroy(particle);
+        while (hit != true)
+        {
             yield return null;
         }
         rb.velocity = Vector3.zero;
@@ -164,30 +186,35 @@ public class Enemy : MonoBehaviour {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
-    void NewBody(int newBodyRange) {
+    void NewBody(int newBodyRange)
+    {
         GameObject newBody = Instantiate(bodies[newBodyRange]);
         newBody.transform.position = transform.position;
         newBody.transform.eulerAngles = transform.eulerAngles + newBody.transform.eulerAngles;
         newBody.transform.SetParent(transform);
         newBody.transform.localScale = new Vector3(newBody.transform.localScale.x * transform.localScale.x, newBody.transform.localScale.y * transform.localScale.y, newBody.transform.localScale.z * transform.localScale.z);
-        if (body != null) {
+        if (body != null)
+        {
             body.SetActive(false);
             Destroy(body);
         }
         body = newBody;
     }
 
-    public void Animation() {
+    public void Animation()
+    {
         percentOfEndAnimation += 1f / animationFrame;
         originPosition = transform.position - addPosition;
         addPosition = LerpPosition(lastPosition, nextPosition, percentOfEndAnimation);
         transform.position = originPosition + addPosition;
-        if (percentOfEndAnimation >= 1) {
+        if (percentOfEndAnimation >= 1)
+        {
             NewAnimation(randomXValue, randomZValue, minAnimationFrame, maxAnimationFrame);
         }
     }
 
-    Vector3 LerpPosition(Vector3 first, Vector3 second, float Between) {
+    Vector3 LerpPosition(Vector3 first, Vector3 second, float Between)
+    {
         Vector3 final = Vector3.zero;
         final.x = Mathf.Lerp(first.x, second.x, Between);
         final.y = Mathf.Lerp(first.y, second.y, Between);
@@ -195,7 +222,8 @@ public class Enemy : MonoBehaviour {
         return final;
     }
 
-    void NewAnimation(float randomXValue, float randomZValue, float minAnimationFrame, float maxAnimationFrame) {
+    void NewAnimation(float randomXValue, float randomZValue, float minAnimationFrame, float maxAnimationFrame)
+    {
         lastPosition = nextPosition;
         float randomX = Random.Range(-randomXValue, randomXValue);
         float randomZ = Random.Range(-randomZValue, randomZValue);
@@ -205,8 +233,10 @@ public class Enemy : MonoBehaviour {
     }
 
 
-    private void OnTriggerEnter(Collider other) {
-        if (die && other.gameObject.tag == "Ground") {
+    private void OnTriggerEnter(Collider other)
+    {
+        if (die && other.gameObject.tag == "Ground")
+        {
             hit = true;
         }
     }
