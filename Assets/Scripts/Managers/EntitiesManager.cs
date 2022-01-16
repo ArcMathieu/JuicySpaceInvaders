@@ -41,6 +41,9 @@ public class EntitiesManager : MonoBehaviour {
         }
         NewDirection();
         ShootTimer();
+        if (enemies.Count == 0) {
+            NewWave(enemiesX, enemiesY);
+        }
     }
 
     void NewWave(int enemyEachLine, int lines) {

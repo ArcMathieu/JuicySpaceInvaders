@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         bkack.Play("BlackFade");
         Uiback.Play("UIEmptyAnim");
+        Time.timeScale = 1;
     }
     // Update is called once per frame
     void Update()
@@ -57,9 +58,13 @@ public class GameManager : MonoBehaviour
         PlayerPrefs = Instantiate(PlayerPrefs, Vector3.zero, new Quaternion(0,180,0,0), BarrageAnim.transform);
         isStart = true;
         PoliceMoveForward = true;
+        StartCoroutine(AYA());
+    }
+    IEnumerator AYA() {
+        yield return new WaitForSeconds(5f);
         Gino.instance.entitiesManager.canShoot = true;
     }
-    bool isPaused;
+        bool isPaused;
     public void PauseGame()
     {
         isPaused = !isPaused;

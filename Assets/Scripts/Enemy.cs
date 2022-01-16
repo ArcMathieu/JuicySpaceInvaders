@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     Rigidbody rb;
 
     public bool hit = false;
+    float usualY;
 
     public float bulletSpawnDist;
     public GameObject explosion;
@@ -55,6 +56,7 @@ public class Enemy : MonoBehaviour
         rb.velocity = new Vector3(speed * direction, 0, 0);
         NewBody(bodies.Length - 1);
         NewAnimation(randomXValue, randomZValue, minAnimationFrame, maxAnimationFrame);
+        usualY = transform.localPosition.y;
     }
     bool alreadyAdvance;
     // Update is called once per frame
@@ -169,7 +171,6 @@ public class Enemy : MonoBehaviour
         Vector3 force = new Vector3(0, 1, 0.5f);
         force = force * 700;
         rb.AddForce(force);
-        rb.useGravity = true;
         bc.isTrigger = true;
         hit = false;
         yield return new WaitForSeconds(1f);
